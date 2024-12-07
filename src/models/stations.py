@@ -2,7 +2,7 @@ from src.extensions import db
 from src.models.base import BaseModel
 
 
-class Station(db.Model):
+class Stations(db.Model, BaseModel):
     __tablename__ = 'stations'
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -13,7 +13,7 @@ class Station(db.Model):
     longitude = db.Column(db.Numeric(9, 6), nullable=False)
 
     # Relationship with WeatherData
-    weather_data = db.relationship('WeatherData', backref='station', lazy=True)
+    weather_data = db.relationship('WeatherData', back_populates='stations')
 
     def __repr__(self):
         return f"<Station(id={self.id}, name={self.station_name})>"

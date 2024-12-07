@@ -1,0 +1,8 @@
+# for mysql
+flask init_db
+flask populate_db
+
+# for env
+python3 -m venv venv
+source venv/bin/activate
+

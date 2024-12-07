@@ -1,7 +1,7 @@
 from flask_restx import Resource
 
 from src.api.nsmodels import stations_ns, stations_model
-from src.models import Station
+from src.models import Stations
 
 
 @stations_ns.route('/stations')
@@ -10,7 +10,7 @@ class StationAPI(Resource):
 
     @stations_ns.marshal_with(stations_model)
     def get(self):
-        stations = Station.query.all()
+        stations = Stations.query.all()
         if not stations:
             return {"error": "სადგურები არ მოიძებნა."}, 404
         
