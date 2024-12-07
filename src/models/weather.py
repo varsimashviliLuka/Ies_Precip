@@ -2,7 +2,7 @@ from src.extensions import db
 from src.models.base import BaseModel
 
 
-class WeatherData(db.Model):
+class WeatherData(db.Model, BaseModel):
     __tablename__ = 'weather_data'
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -10,6 +10,8 @@ class WeatherData(db.Model):
     precip_rate = db.Column(db.String(128), nullable=False)
     precip_accum = db.Column(db.String(128), nullable=False)
     precip_time = db.Column(db.DateTime, nullable=False)
+
+    stations = db.relationship('Stations', back_populates='weather_data')
 
 
     def __repr__(self):
