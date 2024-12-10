@@ -8,7 +8,8 @@ from os import path, sep, pardir
 class Config(object):
     SECRET_KEY = os.getenv('MY_SECRET_KEY', 'default_secret_key')
     BASE_DIR = path.abspath(path.dirname(__file__) + sep + pardir)
-
+    
+    RESTX_MASK_SWAGGER = False
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///' + path.join(BASE_DIR, 'db.sqlite')

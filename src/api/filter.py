@@ -13,7 +13,7 @@ class FilterAPI(Resource):
     @filter_ns.doc(parser=filter_parser)
     @filter_ns.marshal_with(filter_model)
     def post(self):
-        '''გავფილტროთ პროექტები სხვადასხვა პარამეტრებით'''
+        '''გავფილტროთ მონაცემები სხვადასხვა პარამეტრებით'''
         # Parse the filter arguments
         args = filter_parser.parse_args()
 
