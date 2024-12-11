@@ -1,4 +1,4 @@
-from flask_restx import reqparse, fields
+from flask_restx import reqparse, fields, inputs
 from src.extensions import api
 
 
@@ -13,6 +13,7 @@ stations_model = stations_ns.model('Stations', {
     'api': fields.String(required=False, description='Wunderground api-ის ლინკი', example='https://api.weather.com/v2/pws/observations/current?apiKey=e1f10a1e7..'),
     'latitude': fields.Float(required=True, description='სადგურის განედი', example=42.0163),
     'longitude': fields.Float(required=True, description='სადგურის გრძედი', example=43.1412),
+    'status': fields.Boolean(required=True,description='სადგურის სტატუს',example=True)
 })
 
 
@@ -23,4 +24,5 @@ stations_parser.add_argument("url", required=True, type=str, help="შეიყ�
 stations_parser.add_argument("api", required=True, type=str, help="შეიყვანეთ სადგურის wunderground-ის API-ის ლინკი")
 stations_parser.add_argument("latitude", required=True, type=float, help="შეიყვანეთ განედი")
 stations_parser.add_argument("longitude", required=True, type=float, help="შეიყვანეთ გრძედი")
+stations_parser.add_argument("status", required=True, type=inputs.boolean, help="შეიყვანეთ სტატუსი")
 

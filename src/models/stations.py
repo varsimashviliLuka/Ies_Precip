@@ -11,6 +11,7 @@ class Stations(db.Model, BaseModel):
     api = db.Column(db.String(512), nullable=False)
     latitude = db.Column(db.Numeric(9, 6), nullable=False)
     longitude = db.Column(db.Numeric(9, 6), nullable=False)
+    status = db.Column(db.Boolean,default=True)    
 
     # Relationship with WeatherData
     weather_data = db.relationship('WeatherData', back_populates='stations')

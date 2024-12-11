@@ -40,3 +40,13 @@ def populate_db():
 
 
     click.echo("Frist Tables Created")
+
+@click.command("insert_db")
+@with_appcontext
+def insert_db():
+    # ყველა სადგურის სტატუსს ცვლის True-თი
+    # stations = Stations.query.all()
+    # for i in stations:
+    #     i.status = True
+    #     i.save()
+    pass
