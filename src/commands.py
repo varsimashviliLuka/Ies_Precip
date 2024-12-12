@@ -4,7 +4,7 @@ import csv
 from os import path
 
 from src.extensions import db
-from src.models import Stations
+from src.models import Stations, User, Role
 from src import Config
 
 
@@ -37,6 +37,20 @@ def populate_db():
                 longitude=row['longitude']
             )
             new_station.create()
+    
+    click.echo("Creating Role")
+    role = Role(name="Admin", is_admin=True)
+    role.create()
+    role = Role(name="User")
+    role.create()
+
+    click.echo("Creating User")
+    admin_user = User (
+        email="luka.varsimashvili@iliauni.edu.ge",
+        password="Lukito592",
+        role_id=1
+    )
+    admin_user.create()
 
 
     click.echo("Frist Tables Created")
@@ -49,4 +63,7 @@ def insert_db():
     # for i in stations:
     #     i.status = True
     #     i.save()
+
+    # db.create_all()
+    
     pass

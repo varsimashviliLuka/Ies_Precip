@@ -2,7 +2,6 @@ from flask_restx import reqparse, fields, inputs
 from src.extensions import api
 
 
-
 stations_ns = api.namespace('Stations', description='API სადგურების შესახებ', path='/api')
 
 
