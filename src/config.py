@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+from datetime import timedelta
 from os import path, sep, pardir
 
 # Load environment variables from a custom path
@@ -20,6 +21,17 @@ class Config(object):
     MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD', 'default_password')
     # MySQL connection URI
     SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DATABASE}'
+
+    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'default_jwt_secret_key')
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(hours=12)
+    AUTHORIZATION ={
+        'JsonWebToken': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    }
 
 
     

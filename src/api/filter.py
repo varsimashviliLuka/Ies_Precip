@@ -1,7 +1,9 @@
 from flask_restx import Resource
 from datetime import datetime
-from sqlalchemy import and_, func
+from sqlalchemy import func
 from sqlalchemy.sql import extract
+
+from flask_jwt_extended import jwt_required
 
 from src.api.nsmodels import filter_ns, filter_parser, filter_model
 from src.models import WeatherData
@@ -10,6 +12,8 @@ from src.models import WeatherData
 @filter_ns.route('/filter')
 @filter_ns.doc(responses={200: 'OK', 400: 'Invalid Argument', 401: 'JWT Token Expires', 403: 'Unauthorized', 404: 'Not Found'})
 class FilterAPI(Resource):
+    @jwt_required()
+    @filter_ns.doc(security="JsonWebToken")
     @filter_ns.doc(parser=filter_parser)
     @filter_ns.marshal_with(filter_model)
     def post(self):
