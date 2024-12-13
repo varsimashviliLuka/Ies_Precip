@@ -4,7 +4,7 @@ import csv
 from os import path
 
 from src.extensions import db
-from src.models import Stations, User, Role
+from src.models import Stations, WeatherData, User, Role
 from src import Config
 
 
@@ -37,6 +37,20 @@ def populate_db():
                 longitude=row['longitude']
             )
             new_station.create()
+
+    click.echo("Adding Precip Data")
+    with open(weather_data_csv_file_path, mode='r') as file:
+        csv_reader = csv.DictReader(file)
+        # Iterate through each row in the CSV file
+        for row in csv_reader:
+            # Create a new Station instance for each row
+            new_precip = WeatherData(
+                station_id=row['station_id'],
+                precip_rate=row['precip_rate'],
+                precip_accum=row['precip_accum'],
+                precip_time=row['precip_time']
+            )
+            new_precip.create()
     
     click.echo("Creating Role")
     role = Role(name="Admin", is_admin=True)

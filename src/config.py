@@ -9,6 +9,7 @@ from os import path, sep, pardir
 class Config(object):
     SECRET_KEY = os.getenv('MY_SECRET_KEY', 'default_secret_key')
     BASE_DIR = path.abspath(path.dirname(__file__) + sep + pardir)
+    TEMPLATES_FOLDERS = 'src/templates'
     
     RESTX_MASK_SWAGGER = False
 
