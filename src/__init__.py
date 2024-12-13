@@ -1,23 +1,30 @@
-from flask import Flask
+from flask import Flask, render_template
+from flask_cors import CORS
 
 from src.config import Config
 from src.api import api
 from src.extensions import db, api, migrate, jwt
+from src.views import main_blueprint
 from src.commands import init_db, populate_db, insert_db
 
 from src.models import User
 
+BLUEPRINTS = [main_blueprint]
 COMMANDS = [init_db, populate_db, insert_db]
 
 
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(Config)
 
-
+    @app.route('/')
+    def home():
+        return render_template('index.html')
+    
     register_extensions(app)
-
+    register_blueprints(app)
     register_commands(app)
 
 
@@ -52,10 +59,19 @@ def register_extensions(app):
             user = User.query.filter_by(uuid=user_uuid).first()
             return user
         return None
-
-
+    
+    
+def register_blueprints(app):
+    for blueprint in BLUEPRINTS:
+        app.register_blueprint(blueprint)
     
 def register_commands(app):
     for command in COMMANDS:
         app.cli.add_command(command)
         
+# Custom error handler for 404
+def register_error_handlers(app):
+    @app.errorhandler(404)
+    def page_not_found(e):
+        # You can return a JSON response or render a custom HTML template
+        return render_template('404.html'), 404

@@ -6,12 +6,12 @@ auth_ns = api.namespace('Authentification', description='API მომხმა�
 
 registration_parser = reqparse.RequestParser()
 
-registration_parser.add_argument('email', type=inputs.email(check=True), required=True, help="გთხოვთ შეიყვანეთ მეილი (luka.varsimashvili@iliauni.edu.ge)")
+registration_parser.add_argument('email', type=inputs.email(check=True), required=True, help="გთხოვთ შეიყვანეთ მეილი luka.varsimashvili@iliauni.edu.ge")
 registration_parser.add_argument('password', type=str, required=True, help="გთხოვთ შეიყვანეთ პაროლი")
 registration_parser.add_argument('passwordRepeat', type=str, required=True, help='გთხოვთ გაიმეორეთ პაროლი')
 registration_parser.add_argument('role_name', type=str, required=False, default='User', help="შეიყვანეთ როლი (User/Admin)")
 
 # Auth parser
 auth_parser = reqparse.RequestParser()
-auth_parser.add_argument("email", required=True, type=str, help="გთხოვთ შეიყვანეთ მეილი (luka.varsimashvili@iliauni.edu.ge)")
+auth_parser.add_argument("email", required=True, type=str, help="გთხოვთ შეიყვანეთ მეილი luka.varsimashvili@iliauni.edu.ge")
 auth_parser.add_argument("password", required=True, type=str, help="გთხოვთ შეიყვანეთ პაროლი")

@@ -32,7 +32,7 @@ class StationsListAPI(Resource):
 
         admin = User.query.filter_by(uuid=identity).first()
         if not admin.check_permission():
-            return {"message": 'თქვენ არ გაქვთ სადგურის დამატების უფლება'}, 403
+            return {"error": 'თქვენ არ გაქვთ სადგურის დამატების უფლება'}, 403
 
         args = stations_parser.parse_args()
 
@@ -75,7 +75,7 @@ class StationsAPI(Resource):
 
         admin = User.query.filter_by(uuid=identity).first()
         if not admin.check_permission():
-            return {"message": 'თქვენ არ გაქვთ სადგურის რედაქტირების უფლება'}, 403
+            return {"error": 'თქვენ არ გაქვთ სადგურის რედაქტირების უფლება'}, 403
 
         station = Stations.query.filter_by(id=id).first()
         if not station:
@@ -103,12 +103,12 @@ class StationsAPI(Resource):
 
         admin = User.query.filter_by(uuid=identity).first()
         if not admin.check_permission():
-            return {"message": 'თქვენ არ გაქვთ სადგურის წაშლის უფლება'}, 403
+            return {"error": 'თქვენ არ გაქვთ სადგურის წაშლის უფლება'}, 403
 
 
         data = WeatherData.query.filter_by(station_id=id).first()
         if data:
-            return {'message': 'სადგურის წაშლა წარუმატებლად დასრულდა (აღნიშნულ სადგურზე მონაცემი არსებობს)'}, 400
+            return {'error': 'სადგურის წაშლა წარუმატებლად დასრულდა (აღნიშნულ სადგურზე მონაცემი არსებობს)'}, 400
         else:
             station = Stations.query.filter_by(id=id).first()
             if not station:
