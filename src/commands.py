@@ -64,6 +64,5 @@ def insert_db():
     #     i.status = True
     #     i.save()
 
-    # db.create_all()
     
     pass
