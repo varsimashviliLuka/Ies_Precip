@@ -65,6 +65,13 @@ def populate_db():
         role_id=1
     )
     admin_user.create()
+    click.echo("Creating User")
+    admin_user = User (
+        email="roma.grigalashvili@iliauni.edu.ge",
+        password="Grigalash27",
+        role_id=1
+    )
+    admin_user.create()
 
 
     click.echo("Frist Tables Created")
