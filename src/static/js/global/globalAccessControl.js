@@ -148,10 +148,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const loginPage = '/login';
     const registrationPage = '/registration';
     const homePage = '/';
+    const filterPage = '/filter';
     const currentPage = window.location.pathname;
     const token = localStorage.getItem('access_token');
 
-    if (!token && currentPage !== loginPage && currentPage !== registrationPage) {
+    if (!token && currentPage !== loginPage && currentPage !== registrationPage && currentPage !== homePage) {
         window.location.href = loginPage;
     }
 
@@ -162,6 +163,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Redirect to home page if token exists and user is on the login or registration page
     if (token && (currentPage === loginPage || currentPage === registrationPage)) {
-        window.location.href = homePage;
+        window.location.href = filterPage;
     }
 });
