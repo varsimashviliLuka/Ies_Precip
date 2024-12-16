@@ -56,12 +56,4 @@ class FilterAPI(Resource):
         if not weather_data:
             return {"error": "მონაცემი ვერ მოიძებნა"}, 404
 
-        
-
         return weather_data, 200
-        
-
-
-
-
-        

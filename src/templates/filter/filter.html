@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+    IesData - Projects
+{% endblock %}
+
+{% block body %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/filter/filter.js') }}" defer></script>
+<div class="mt-5">
+    <form id="filterDataForm" enctype="multipart/form-data" onsubmit="filterDataForm(event)">
+        <div class="row d-flex justify-content-center align-items-center ">
+            <div class="col-3 m-2">
+                <select class="form-select text-center" id="stationSelect" name="station_id">
+                    <option selected>Select Any Station</option>
+                    <!-- Dynamically populate stations here -->
+                </select>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-3 m-2">
+                <div class="text-center pt-2">Date:</div>
+                <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
+                <input type="date" class="text-center form-control form-control-sm" id="filterDate" name="date">
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-3 m-2">
+                <div class="text-center pt-2">Start Time (From):</div>
+                <div class="text-center fw-lighter">Format: HH:MM (24-hour)</div>
+                <input type="time" class="text-center form-control form-control-sm" id="filterStartTime" name="start_time" step="1">
+            </div>
+            <div class="col-3 m-2">
+                <div class="text-center pt-2">End Time (Until):</div>
+                <div class="text-center fw-lighter">Format: HH:MM (24-hour)</div>
+                <input type="time" class="text-center form-control form-control-sm" id="filterEndTime" name="end_time" step="1">
+            </div>
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-2 m-2">
+                    <select class="form-select text-center" id="stepMin" name="step_min">
+                        <option value="5">5 Minutes</option>
+                        <option value="10">10 Minutes</option>
+                        <option value="30">30 Minutes</option>
+                        <option value="60">1 Hour</option>
+                        <option value="120">2 Hour</option>
+                    </select>
+                </div>
+            </div>
+            <div class="m-5 text-center">
+                    <button type="submit" class="btn btn-sm btn-success">გაფილტვრა</button>
+                    <button type="reset" class="btn btn-sm btn-secondary">გასუფთავება</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- for Precip Data -->
+    <div id="precipDataTableContainer" class="table-responsive-xxl text-center mt-2" style="font-size: x-small;">
+        <table class="table align-middle table-bordered rounded-2 border-muted mb-0 bg-white table-striped">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Time: დრო</th>
+                    <th>PR: წვიმის ინტენსივობა მმ/სთ</th>
+                    <th>PA: წვიმის აკუმულაცია მმ</th>
+                </tr>
+            </thead>
+            <tbody id="precipDataTable" class="mb-3">
+                <!-- Data will be populated dynamically here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
