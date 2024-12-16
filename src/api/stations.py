@@ -2,7 +2,7 @@ from flask_restx import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from src.api.nsmodels import stations_ns, stations_model, stations_parser
-from src.models import Stations, WeatherData, User, Role
+from src.models import Stations, WeatherData, User
 
 
 
