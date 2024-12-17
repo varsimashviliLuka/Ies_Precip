@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Define static navigation items
     const navItems = [
         { endpoint: '/', text: 'მთავარი' },
+        { endpoint: '/filter', text: 'ფილტრი' }
         // Add other static links as needed
     ];
 

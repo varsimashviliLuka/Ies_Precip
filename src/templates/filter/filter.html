@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block title %}
-    IesData - Projects
+    IesPrecip - Filter
 {% endblock %}
 
 {% block body %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/filter/filter.js') }}" defer></script>
 <div class="mt-5">
-    <form id="filterDataForm" enctype="multipart/form-data" onsubmit="filterDataForm(event)">
+    <form id="filterDataForm" enctype="multipart/form-data">
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="col-3 m-2">
                 <div class="text-center">Select Any Station:</div>
@@ -54,7 +54,7 @@
     </form>
 
     <!-- for Precip Data -->
-    <div id="precipDataTableContainer" class="table-responsive-xxl text-center mt-2" style="font-size: x-small;">
+    <div id="precipDataTableContainer" class="table-responsive-xxl text-center mt-2" style="font-size: small;">
         <table class="table align-middle table-bordered rounded-2 border-muted mb-0 bg-white table-striped">
             <thead class="table-secondary">
                 <tr>
