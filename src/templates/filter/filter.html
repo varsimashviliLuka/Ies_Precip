@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 
 {% block title %}
-    IesData - Projects
+    IesPrecip - Filter
 {% endblock %}
 
 {% block body %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/filter/filter.js') }}" defer></script>
 <div class="mt-5">
-    <form id="filterDataForm" enctype="multipart/form-data" onsubmit="filterDataForm(event)">
+    <form id="filterDataForm" enctype="multipart/form-data">
         <div class="row d-flex justify-content-center align-items-center ">
             <div class="col-3 m-2">
-                <select class="form-select text-center" id="stationSelect" name="station_id">
-                    <option selected>Select Any Station</option>
+                <div class="text-center">Select Any Station:</div>
+                <select class="form-select text-center" id="stationSelect" name="station_id" required>
                     <!-- Dynamically populate stations here -->
                 </select>
             </div>
@@ -20,24 +20,25 @@
             <div class="col-3 m-2">
                 <div class="text-center pt-2">Date:</div>
                 <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
-                <input type="date" class="text-center form-control form-control-sm" id="filterDate" name="date">
+                <input type="date" class="text-center form-control form-control" id="filterDate" name="date" value="{{ today_date }}" required>
             </div>
         </div>
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-3 m-2">
                 <div class="text-center pt-2">Start Time (From):</div>
-                <div class="text-center fw-lighter">Format: HH:MM (24-hour)</div>
-                <input type="time" class="text-center form-control form-control-sm" id="filterStartTime" name="start_time" step="1">
+                <div class="text-center fw-lighter">HH:MM:SS (12-hour) "00:00 - 12:00   --  AM" </div>
+                <input type="time" class="text-center form-control form-control" id="filterStartTime" name="start_time" step="1" value="00:00:00" required>
             </div>
             <div class="col-3 m-2">
                 <div class="text-center pt-2">End Time (Until):</div>
-                <div class="text-center fw-lighter">Format: HH:MM (24-hour)</div>
-                <input type="time" class="text-center form-control form-control-sm" id="filterEndTime" name="end_time" step="1">
+                <div class="text-center fw-lighter">HH:MM:SS (12-hour) "12:00 - 24:00   --  PM"</div>
+                <input type="time" class="text-center form-control form-control" id="filterEndTime" name="end_time" step="1" value="23:59:59" required>
             </div>
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-2 m-2">
-                    <select class="form-select text-center" id="stepMin" name="step_min">
-                        <option value="5">5 Minutes</option>
+                    <div class="text-center">Select Any Step:</div>
+                    <select class="form-select text-center" id="stepMin" name="step_min" required>
+                        <option selected value="5">5 Minutes</option>
                         <option value="10">10 Minutes</option>
                         <option value="30">30 Minutes</option>
                         <option value="60">1 Hour</option>
@@ -53,7 +54,7 @@
     </form>
 
     <!-- for Precip Data -->
-    <div id="precipDataTableContainer" class="table-responsive-xxl text-center mt-2" style="font-size: x-small;">
+    <div id="precipDataTableContainer" class="table-responsive-xxl text-center mt-2" style="font-size: small;">
         <table class="table align-middle table-bordered rounded-2 border-muted mb-0 bg-white table-striped">
             <thead class="table-secondary">
                 <tr>
