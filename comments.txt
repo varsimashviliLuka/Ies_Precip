@@ -2,7 +2,13 @@
 flask init_db
 flask populate_db
 
-# for env
+1. გარე გარემოს გამართვა და dependencies ინსტალაცია
+დავალება: გააკეთეთ აპლიკაციის გარე გარემო და dependencies ინსტალაცია
+
+დეტალები:
+
+შექმენით virtual environment:
 python3 -m venv venv
 source venv/bin/activate
-
+დააინსტალირეთ dependencies:
+pip install -r requirements.txt
