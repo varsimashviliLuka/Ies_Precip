@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Add a default option
             const defaultOption = document.createElement('option');
             defaultOption.textContent = 'Select Any Station';
+            defaultOption.disabled = true;
             stationSelect.appendChild(defaultOption);
 
             // Populate select options dynamically

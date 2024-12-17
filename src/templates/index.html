@@ -1,11 +1,55 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Datetimepicker Example</title>
 
-{% block title %}
-    IesData - Projects
-{% endblock %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <!-- Bootstrap datetimepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <!-- 24 Hour Time Picker -->
+                    <span>Select 24 hour time format</span>
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <br/>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{% block body %} 
-<div class="d-flex justify-content-center align-items-center pt-5">
-    <h2>index page</h2>
-</div>
-{% endblock %}
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap datetimepicker JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            // 24-hour time format
+            $('#datetimepicker1').datetimepicker({
+                format: 'HH:mm',  // 24-hour format (hours and minutes)
+                stepping: 5      // 15-minute intervals
+            });
+        });
+    </script>
+</body>
+</html>
