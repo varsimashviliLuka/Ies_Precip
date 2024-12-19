@@ -21,7 +21,7 @@ def init_db():
 @with_appcontext
 def populate_db():
     stations_csv_file_path = path.join(Config.BASE_DIR, "stations_2024-12-05.csv")
-    weather_data_csv_file_path = path.join(Config.BASE_DIR, "weather_data_2024-12-05.csv")
+    weather_data_csv_file_path = path.join(Config.BASE_DIR, "weather_data_2024-06-26_2024-06-28.csv")
 
     click.echo("Adding Stations")
     with open(stations_csv_file_path, mode='r') as file:
