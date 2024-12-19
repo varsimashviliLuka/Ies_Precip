@@ -21,9 +21,12 @@ except Exception as err:
 
 def get_stations():
     mycursor = mydb.cursor()
-    mycursor.execute("select id, api from stations;")
+    mycursor.execute("select id, api from stations where status = 1;")
     result = mycursor.fetchall()
     return result
+
+
+
 
 
 def insert_data(weather_data):
