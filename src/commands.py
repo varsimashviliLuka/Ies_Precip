@@ -54,7 +54,10 @@ def populate_db():
                 line_top_bottom = row['line_top_bottom'],
                 map_status = row['status'],
                 shorten_station_name = row['id'],
-                top_bottom = row['top_bottom']
+                top_bottom = row['top_bottom'],
+                first_div_height = row['first_div_height'],
+                precip_accum = row['PRECIP_ACCUM'],
+                precip_rate = row['PRECIP_RATE']
             )
             new_station_div_position.create()
 

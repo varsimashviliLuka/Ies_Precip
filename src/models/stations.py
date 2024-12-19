@@ -40,6 +40,11 @@ class StationsDivPositions(db.Model, BaseModel):
 
     map_status = db.Column(db.Integer, nullable=False)
 
+    first_div_height = db.Column(db.Float, nullable=False)
+
+    precip_accum = db.Column(db.String(20),nullable=False)
+    precip_rate = db.Column(db.String(20),nullable=False)
+
     top_bottom = db.Column(db.Float, nullable=False)
 
     # Relationship with WeatherData
