@@ -20,11 +20,17 @@ except Exception as err:
 
 
 def get_stations():
-    mycursor = mydb.cursor()
-    mycursor.execute("select id, api from stations;")
-    result = mycursor.fetchall()
+    try:
+        mycursor = mydb.cursor()
+        mycursor.execute("select id, api from stations where status = 1;")
+        result = mycursor.fetchall()
+        return result
+    except Exception as e:
+        print_and_log(f"დაბრუნდა ერორი: {e}")
+        result = []
+    finally:
+        mycursor.close()
     return result
-
 
 def insert_data(weather_data):
     mycursor = mydb.cursor()
