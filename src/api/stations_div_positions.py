@@ -19,6 +19,7 @@ class StationsDivPositionsApi(Resource):
     def get(self):
         '''Fetch all station div information'''
 
+
         stations_div_positions = StationsDivPositions.query.all()
         if not stations_div_positions:
             return {"error": "სადგურები არ მოიძებნა."}, 404
