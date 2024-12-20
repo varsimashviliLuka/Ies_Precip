@@ -1,11 +1,49 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}
-    IesData - Projects
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Display Data on Map</title>
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.umd.min.js"></script>
+    <link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.1.1/maptiler-sdk.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <link href="{{ url_for('static', filename='css/map.css') }}" rel="stylesheet"/>
+</head>
 
-{% block body %} 
-<div class="d-flex justify-content-center align-items-center pt-5">
-    <h2>index page</h2>
-</div>
-{% endblock %}
+<body>
+
+
+<svg id="lines" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></svg>
+
+
+
+        <div id="map">
+
+
+            <div class="logo">
+                <img src="static/img/iliauni_logo.png" class="img"  alt="Image">
+            </div>
+            <div class="description">
+                <p>PR: წვიმის ინტენსივობა მმ/სთ</p>
+                <p>PA: წვიმის აკუმულაცია მმ </p>
+
+            </div>
+            <div class="login_button">
+                <button onclick="go_to_login_page()">Log in</button>
+            </div>
+        </div>
+
+
+
+        <div id="map1">
+            <div class="div_for_map1"></div>
+
+        </div>
+
+        <script type="text/javascript" src="{{ url_for('static', filename='js/map/map.js') }}" defer></script>
+
+</body>
+
+</html>
