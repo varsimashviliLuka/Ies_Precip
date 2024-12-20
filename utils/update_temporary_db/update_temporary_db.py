@@ -59,8 +59,7 @@ def main():
             connection.commit()
             continue
 
-        print(api_link)
-        print(station[1])
+
         data = response.json()
 
         try:
