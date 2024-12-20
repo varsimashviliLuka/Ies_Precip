@@ -2,7 +2,7 @@ import requests
 
 from insert_db import get_stations
 from insert_db import insert_data
-from logs import print_and_log
+from logging_tool import print_and_log
 
 
 weather_data = []
