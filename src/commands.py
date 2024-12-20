@@ -64,6 +64,7 @@ def populate_db():
         password="Lukito592",
         role_id=1
     )
+
     admin_user.create()
     click.echo("Creating User")
     admin_user = User (
@@ -73,6 +74,13 @@ def populate_db():
     )
     admin_user.create()
 
+    click.echo("Creating User")
+    admin_user = User(
+        email="levan.lomidze.5@iliauni.edu.ge",
+        password="fantasticfox",
+        role_id=1
+    )
+    admin_user.create()
 
     click.echo("Frist Tables Created")
 
