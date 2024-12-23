@@ -4,23 +4,20 @@
 # insert into weather_data (station_id, precip_rate, precip_accum) values (1, "20.64", "10.23");
 # select stations.station_name, stations.url, stations.latitude, stations.longitude, weather_data.precip_rate, weather_data.precip_accum, weather_data.precip_time  from stations  left join weather_data on stations.id = weather_data.station_id;
 
-import mysql.connector
-
-from logs import print_and_log
+import pymysql
 
 try:
-    mydb = mysql.connector.connect(
-        host        ="localhost",
-        user        ="root",
-        password    ="Ml@Root88",
-        database    ="weather"
+    connection = pymysql.connect(
+        host="localhost",
+        user="root",
+        password="Ml@Root88",
+        database="weather"
     )
-except Exception as err:
-    print_and_log("ბაზასთან დაკავშირებისას მოხდა შეცდომა",err )
-
+except pymysql.MySQLError as e:
+    raise
 
 def get_stations():
-    mycursor = mydb.cursor()
+    mycursor = connection.cursor()
     mycursor.execute("select id, api from stations where status = 1;")
     result = mycursor.fetchall()
     return result
@@ -30,12 +27,12 @@ def get_stations():
 
 
 def insert_data(weather_data):
-    mycursor = mydb.cursor()
+    mycursor = connection.cursor()
     for data in weather_data:
         mycursor.execute(f'insert into weather_data (station_id, precip_rate, precip_accum) values ({data[0]}, "{data[1]}", "{data[2]}");')
-        mydb.commit()
+        connection.commit()
     
-    mydb.close()
+    connection.close()
 
 
 
