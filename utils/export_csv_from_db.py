@@ -15,7 +15,7 @@ logging.basicConfig(filename=log_filename , level=logging.INFO, format='%(asctim
 MYSQL_HOST = os.getenv('MYSQL_HOST')
 MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
 MYSQL_USER = os.getenv('MYSQL_USER')
-MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD_CSV')
+MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD_STR')
 
 # გარემოს ცვლადების შემოწმება
 if not all([MYSQL_HOST, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD]):
