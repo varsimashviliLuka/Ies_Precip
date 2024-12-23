@@ -16,5 +16,39 @@ class Stations(db.Model, BaseModel):
     # Relationship with WeatherData
     weather_data = db.relationship('WeatherData', back_populates='stations')
 
+    stations_div_positions = db.relationship('StationsDivPositions', back_populates='stations')
+
     def __repr__(self):
         return f"<Station(id={self.id}, name={self.station_name})>"
+    
+
+class StationsDivPositions(db.Model, BaseModel):
+    __tablename__ = 'stations_div_positions'
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    station_id = db.Column(db.Integer, db.ForeignKey('stations.id'), nullable=False)
+    static_px = db.Column(db.Float, nullable=False)
+
+    left_right = db.Column(db.Float, nullable=False)
+
+    line_rotate = db.Column(db.Float, nullable=False)
+    line_left_right = db.Column(db.Float, nullable=False)
+    line_top_bottom = db.Column(db.Float, nullable=False)
+
+    shorten_station_name = db.Column(db.String(256),nullable=False)
+
+    map_status = db.Column(db.Integer, nullable=False)
+
+    first_div_height = db.Column(db.Float, nullable=False)
+
+    precip_accum = db.Column(db.String(20),nullable=False)
+    precip_rate = db.Column(db.String(20),nullable=False)
+
+    top_bottom = db.Column(db.Float, nullable=False)
+
+    # Relationship with WeatherData
+    stations = db.relationship('Stations', back_populates='stations_div_positions')
+
+    def __repr__(self):
+        return f"<Station(id={self.id}, name={self.station_id})>"
