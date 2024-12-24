@@ -20,7 +20,7 @@ def create_app():
     app.config.from_object(Config)
 
     @app.route('/')
-    def home():
+    def index():
         return render_template('index.html')
     
     register_extensions(app)

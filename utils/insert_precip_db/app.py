@@ -2,7 +2,7 @@ import requests
 
 from insert_db import get_stations
 from insert_db import insert_data
-from logging_tool import print_and_log
+# from logging_tool import print_and_log
 
 
 weather_data = []
@@ -36,7 +36,7 @@ try:
     get_data(result)
     insert_data(weather_data)
 except Exception as err:
-     print_and_log("ფუნქციის გამოძახების დროს მოხდა შეცდომა", err)
+     print("ფუნქციის გამოძახების დროს მოხდა შეცდომა", err)
 
 
 
