@@ -49,7 +49,7 @@ def fetch_precip_data(stations):
                     'precip_rate': "--:--",
                     'precip_accum': "--:--"
                 })
-        except (requests.RequestException, KeyError, IndexError) as e:
+        except Exception as e:
             logging.error(f"მონაცემების მიღების ან დამუშავების შეცდომა სადგურისთვის {station_id}: {e}")
             precip_data.append({
                 'station_id': station_id,
@@ -63,6 +63,7 @@ def insert_precip_data(precip_data):
     """
     მიღებული მონაცემების ჩაწერა მონაცემთა ბაზაში.
     """
+    count = 0
     try:
         for data in precip_data:
             new_record = WeatherData(
@@ -71,10 +72,13 @@ def insert_precip_data(precip_data):
                 precip_accum=data['precip_accum']
             )
             new_record.create()
-            logging.info(f"მონაცემები ჩაწერილია {len(precip_data)} სადგურისთვის.")
+            count += 1
+            
     except Exception as e:
         logging.error(f"მონაცემების ჩაწერის შეცდომა: {e}")
         raise
+    finally :
+        logging.info(f"მონაცემები ჩაწერილია {count} სადგურისთვის.")
 
 
 def main():
@@ -83,6 +87,9 @@ def main():
         try:
             # სადგურების მონაცემების მიღება
             stations = fetch_stations()
+            if not stations:
+                logging.info("სკრიპტი დასრულდა: აქტიური სადგურები არ მოიძებნა.")
+                return
             # სადგურების მონაცემებზე დაყრდნობით API-დან მონაცემების მიღება
             precip_data = fetch_precip_data(stations)
             # მონაცემების ბაზაში ჩაწერა
