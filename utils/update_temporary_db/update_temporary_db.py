@@ -2,8 +2,13 @@ import pymysql
 import os
 from dotenv import load_dotenv
 import requests
+import logging
 
 load_dotenv(dotenv_path='../../.env')
+
+self_name = 'update_temporary_db.log'
+logging.basicConfig(filename=self_name,level=logging.INFO,format="%(asctime)s - %(levelname)s - %(funcName)s - %(message)s",filemode='a')
+
 
 MYSQL_HOST = os.getenv('MYSQL_HOST', 'default_host')
 MYSQL_DATABASE = os.getenv('MYSQL_DATABASE', 'default_database')
@@ -11,12 +16,16 @@ MYSQL_USER = os.getenv('MYSQL_USER', 'default_user')
 MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD_TEMP', 'default_password')
 
 # Database connection
-connection = pymysql.connect(
+try:
+    connection = pymysql.connect(
     host=MYSQL_HOST,
     user=MYSQL_USER,
     password=MYSQL_PASSWORD,
     database=MYSQL_DATABASE
 )
+except Exception as e:
+    logging.critical(f'ბაზასთან კავშირი ვერ შედგა. error: {e}')
+    exit()
 
 cursor = connection.cursor()
 
@@ -26,6 +35,8 @@ def main():
 
     data = cursor.fetchall()
 
+    if not data:
+        logging.error('ბაზაში div მონაცემი ვერ მოიძებნა')
     
     for i in data:
 
@@ -45,12 +56,17 @@ def main():
 
         station = cursor.fetchone()
 
+        if not station:
+            logging.warning(f'{station_id} id-ით სადგური ვერ მოიძებნა')
+
         api_link = station[3]
         
         response = requests.get(api_link)
 
         if response.status_code != 200:
-            print('დაკავშირება ვერ მოხერხდა!')
+
+            logging.warning(f'დაკავშირება ვერ მოხერხდა {station[1]} სადგურზე!')
+            
             first_div_height = 0.00
             precip_rate = "--,--"
             precip_accum = "--,--"
@@ -69,7 +85,7 @@ def main():
             precip_rate = "{:.2f}".format(precip_rate)
             precip_accum = float("{:.2f}".format(precip_accum))
         except:
-            print("json დან მონაცემების ამოღების დროს მოხდა შეცდომა")
+            logging.warning(f"json დან მონაცემების ამოღების დროს მოხდა შეცდომა {station[1]}")
             continue
 
         if precip_accum == 0.0:
@@ -82,6 +98,7 @@ def main():
         query = f'UPDATE stations_div_positions SET first_div_height={first_div_height}, top_bottom={top_bottom}, precip_accum={precip_accum}, precip_rate={precip_rate} WHERE id={data_id}'
         cursor.execute(query)
         connection.commit()
+        logging.info(f'მონაცემი წარმატებით დაემატა {station[1]}')
 
 
     cursor.close()
