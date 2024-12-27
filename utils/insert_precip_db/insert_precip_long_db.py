@@ -1,3 +1,52 @@
+from os import WCONTINUED
+
+import pymysql
+from dotenv import load_dotenv
+import os
+import datetime
+
+load_dotenv(dotenv_path='/home/levany/PycharmProjects/Ies_Precip/.env')
+
+MYSQL_HOST = os.getenv('MYSQL_HOST', 'default_host')
+MYSQL_DATABASE = os.getenv('MYSQL_DATABASE', 'default_database')
+MYSQL_USER = os.getenv('MYSQL_USER', 'default_user')
+MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD_TEMP', 'default_password')
+
+def monitor_station_is_dry():
+    # ეს ფუნქცია აბრუნებს 1 - ს როდესაც pa 24 საათის განმავლობაში 0 -ს უდრის, და შემდგომ ამას ვიყენებთ pa_long ის დასარესეტებლად
+    global zero_start_time # es ukve raghac droa bazidan wamoghebuli
+    elapsed_time = datetime.datetime.now() - zero_start_time
+    if elapsed_time >= datetime.timedelta(hours=24):
+        pa_long = 0
+    return pa_long
+
+def new_day_initialized(pa, prev_pa):
+    if pa < prev_pa:
+        return 1
+    else:
+        return 0
+
+
+
+
+def pa_long_calculator(pa):
+    global pa_long, prev_pa
+    if new_day_initialized(pa,prev_pa) == 0 and pa >= prev_pa: # axali dghe ar dawyebula...
+        if monitor_station_is_dry()
+        pa_long = pa
+        prev_pa = pa
+    elif pa < prev_pa and pa > 0:
+         # ამ else-ის გააქტიურებისას იწყება ახალი დღე რადგან შემოსული pa < prev_pa, შესაბამისად ვიწყებთ pa_long += pa თვლას
+        temp_pa_long = pa_long + pa
+        prev_pa = pa
+        if pa_long < temp_pa_long:
+            pa_long = temp_pa_long
+    else: # როცა pa არი 0
+        if monitor_station_is_dry(pa):
+            pa_long = 0
+    return (pa_long)
+
+'''
 import pymysql
 from dotenv import load_dotenv
 import os
@@ -11,25 +60,21 @@ MYSQL_DATABASE = os.getenv('MYSQL_DATABASE', 'default_database')
 MYSQL_USER = os.getenv('MYSQL_USER', 'default_user')
 MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD_TEMP', 'default_password')
 
+prev_pa = 0
+pa_long = 0
+zero_start_time = None
 
 def return_pa(pa):   # es funqcia gadaivlis {stations_div_positions}-s bazas da daabrunebs pa-s
-####
-#
-#
-#
-#
-#
 
     return pa
-
-
+tempo = 3
 
 
 
 
 def monitor_station_is_dry(pa):
     # ეს ფუნქცია აბრუნებს 1 - ს როდესაც pa 24 საათის განმავლობაში 0 -ს უდრის, და შემდგომ ამას ვიყენებთ pa_long ის დასარესეტებლად
-    zero_start_time = None
+    global zero_start_time
     if pa == 0:
         if zero_start_time is None:
             zero_start_time = datetime.datetime.now()  # იწყება 24 საათიანი ტაიმერი
@@ -42,35 +87,21 @@ def monitor_station_is_dry(pa):
     return False
 
 
-
-list_of_pa_longs = []
-
 def pa_long_calculator(pa):
-    pa = return_pa()
-    prev_pa = 0
-    while pa >= prev_pa:
+    pa = return_pa(tempo)
+    global pa_long, prev_pa
+    if pa >= prev_pa: #pa_long = 4.06, prev_pa = 4.06, pa = 0
         pa_long = pa
         prev_pa = pa
-
-
-        if pa < prev_pa:
-            if monitor_station_is_dry(pa):
-                pa_long = 0
-            else:
-                while pa >= prev_pa:
-                    temp_pa_long = pa_long + pa
-                    if pa_long != temp_pa_long:
-                        pa_long = temp_pa_long
-                        # ეხა დასაწერი მაქ pa_long ის ზრდა, როდესაც 1 დღის ლუპი მორჩა და ახალი დღის მონაცემებმა დაიწყეს შემოსვლა
-                        # ფორმულა უნდა იყოs - - - pa_long + pa - - -
-                        # ამ დროს იწყება ახალი 24 საათი, pa რესეტდება და მისი ათვლა თავიდან იწყება
-                        # ახლა მნიშვნელოვანია სწორად გავწერო კოდი რომ თუ შემოვიდა 0 ები გაჩეკოს monitor_station_if_dry ფუნქცია
-                        #  თუ მან დააბრუნა 0, მაშინ გააგრძელოს pa_long ის სწორად ათვლა
-                        # აქამდე ათვლილიც უნდა დაიმხასოვროს და ძველ pa_long - ს ახალი და ახალი pa ები უმატოს pa_long + pa
-    if pa == 0:
+    elif pa < prev_pa and pa > 0:
+         # ამ else-ის გააქტიურებისას იწყება ახალი დღე რადგან შემოსული pa < prev_pa, შესაბამისად ვიწყებთ pa_long += pa თვლას
+        temp_pa_long = pa_long + pa
+        prev_pa = pa
+        if pa_long < temp_pa_long:
+            pa_long = temp_pa_long
+    else: # როცა pa არი 0
         if monitor_station_is_dry(pa):
             pa_long = 0
-
     return (pa_long)
 
 
@@ -84,6 +115,7 @@ try:
     )
 except Exception as err:
     print(f"ბაზასთან კავშირი ვერ შედგა - {err}")
+    exit()
 
 cursor = connection.cursor()
 
@@ -91,7 +123,11 @@ query = "SELECT precip_accum, station_id FROM weather_data"
 cursor.execute(query)
 rows = cursor.fetchall()
 
+for row in rows:
+    pa = row[0]
 
 
 cursor.close()
 connection.close()
+
+'''
