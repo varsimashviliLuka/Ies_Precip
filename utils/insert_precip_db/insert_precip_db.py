@@ -6,7 +6,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 
 from src import create_app
 from src.models import Stations, WeatherData
-from src.config import Config
 
 # ლოგირების კონფიგურაცია
 LOG_FILENAME = "insert_precip_db.log"
@@ -29,6 +28,7 @@ def fetch_precip_data(stations):
     სადგურებიდან მონაცემების მიღება API-ს საშუალებით.
     """
     precip_data = []
+    counter = 0
     for station_id, api_url in stations:
         try:
             response = requests.get(api_url)
@@ -42,6 +42,7 @@ def fetch_precip_data(stations):
                     'precip_rate': precip_rate,
                     'precip_accum': precip_accum
                 })
+                counter += 1
             else:
                 logging.warning(f"მონაცემების მიღება ვერ მოხერხდა სადგურისთვის {station_id}: HTTP {response.status_code}")
                 precip_data.append({
@@ -56,14 +57,13 @@ def fetch_precip_data(stations):
                 'precip_rate': "--:--",
                 'precip_accum': "--:--"
             })
-    logging.info(f"მონაცემები მიღებულია {len(precip_data)} სადგურისთვის.")
+    logging.info(f"მონაცემები მიღებულია {counter} სადგურისთვის.")
     return precip_data
 
 def insert_precip_data(precip_data):
     """
     მიღებული მონაცემების ჩაწერა მონაცემთა ბაზაში.
     """
-    count = 0
     try:
         for data in precip_data:
             new_record = WeatherData(
@@ -72,13 +72,12 @@ def insert_precip_data(precip_data):
                 precip_accum=data['precip_accum']
             )
             new_record.create()
-            count += 1
             
     except Exception as e:
         logging.error(f"მონაცემების ჩაწერის შეცდომა: {e}")
         raise
     finally :
-        logging.info(f"მონაცემები ჩაწერილია {count} სადგურისთვის.")
+        logging.info(f"მონაცემები ჩაწერილია ბაზაში.")
 
 
 def main():
@@ -99,4 +98,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
