@@ -4,7 +4,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-from src.models import Stations, WeatherData, StationsDivPositions
+from src.models import StationsDivPositions
 from src import create_app
 
 
