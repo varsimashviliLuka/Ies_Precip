@@ -15,6 +15,7 @@ class Stations(db.Model, BaseModel):
 
     # Relationship with WeatherData
     weather_data = db.relationship('WeatherData', back_populates='stations')
+    prev_precip = db.relationship('PrevPrecip', back_populates='stations')
 
     stations_div_positions = db.relationship('StationsDivPositions', back_populates='stations')
 
@@ -36,14 +37,15 @@ class StationsDivPositions(db.Model, BaseModel):
     line_left_right = db.Column(db.Float, nullable=False)
     line_top_bottom = db.Column(db.Float, nullable=False)
 
-    shorten_station_name = db.Column(db.String(256),nullable=False)
+    shorten_station_name = db.Column(db.String(256), nullable=False)
 
     map_status = db.Column(db.Integer, nullable=False)
 
     first_div_height = db.Column(db.Float, nullable=False)
 
-    precip_accum = db.Column(db.String(20),nullable=False)
-    precip_rate = db.Column(db.String(20),nullable=False)
+    precip_accum = db.Column(db.String(20), nullable=False)
+    precip_rate = db.Column(db.String(20), nullable=False)
+    precip_accum_long = db.Column(db.String(20), nullable=False)
 
     top_bottom = db.Column(db.Float, nullable=False)
 

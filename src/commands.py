@@ -57,7 +57,8 @@ def populate_db():
                 top_bottom = row['top_bottom'],
                 first_div_height = row['first_div_height'],
                 precip_accum = row['PRECIP_ACCUM'],
-                precip_rate = row['PRECIP_RATE']
+                precip_rate = row['PRECIP_RATE'],
+                precip_accum_long = row['PRECIP_ACCUM_LONG']
             )
             new_station_div_position.create()
 
