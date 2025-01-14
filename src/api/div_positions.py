@@ -1,16 +1,16 @@
 from flask_restx import Resource
-from src.api.nsmodels import stations_div_positions_ns, stations_div_positions_model
-from src.models import StationsDivPositions
+from src.api.nsmodels import div_positions_ns, div_positions_model
+from src.models import DivPositions
 
-@stations_div_positions_ns.route('/stations/div_positions')
-@stations_div_positions_ns.doc(responses={200: 'OK', 400: 'Invalid Argument', 401: 'JWT Token Expired', 403: 'Unauthorized', 404: 'Not Found'})
-class StationsDivPositionsApi(Resource):
+@div_positions_ns.route('/stations/div_positions')
+@div_positions_ns.doc(responses={200: 'OK', 400: 'Invalid Argument', 401: 'JWT Token Expired', 403: 'Unauthorized', 404: 'Not Found'})
+class DivPositionsApi(Resource):
 
-    @stations_div_positions_ns.marshal_with(stations_div_positions_model)
+    @div_positions_ns.marshal_with(div_positions_model)
     def get(self):
         '''Fetch all station's current div information'''
 
-        stations_div_positions = StationsDivPositions.query.all()
+        stations_div_positions = DivPositions.query.all()
         
         if not stations_div_positions:
             return {"error": "სადგურები არ მოიძებნა."}, 404

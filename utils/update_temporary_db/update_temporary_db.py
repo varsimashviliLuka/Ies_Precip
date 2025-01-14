@@ -4,7 +4,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-from src.models import StationsDivPositions
+from src.models import DivPositions
 from src import create_app
 
 
@@ -63,8 +63,11 @@ def modify_station_details(station_details):
 def main():
     app = create_app()
     with app.app_context():
-        station_details = StationsDivPositions.query.all()
-        modify_station_details(station_details)
+        try:
+            station_details = DivPositions.query.all()
+            modify_station_details(station_details)
+        except Exception as e:
+            logging.critical(f"სკრიპტის შესრულების დროს შეცდომა: {e}")
 
 
 
