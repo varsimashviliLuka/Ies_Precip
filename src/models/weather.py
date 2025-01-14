@@ -25,8 +25,8 @@ class PrevPrecip(db.Model, BaseModel):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     station_id = db.Column(db.Integer, db.ForeignKey('stations.id'), nullable=False)
-    prev_precip_accum = db.Column(db.String(128), nullable=False)
-    last_precip_accum_long = db.Column(db.String(128), nullable=False)
-    precip_time = db.Column(db.DateTime, nullable=False)
+    prev_pa = db.Column(db.Float, nullable=False)
+    last_pa_long = db.Column(db.Float, nullable=False)
+    zero_start_time = db.Column(db.DateTime, nullable=False)
 
     stations = db.relationship('Stations', back_populates='prev_precip')

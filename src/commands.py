@@ -23,6 +23,7 @@ def populate_db():
     stations_csv_file_path = path.join(Config.BASE_DIR, "stations_2024-12-05.csv")
     weather_data_csv_file_path = path.join(Config.BASE_DIR, "weather_data_2024-06-26_2024-06-28.csv")
     station_div_positions_csv_file_path = path.join(Config.BASE_DIR, "station_div_positions.csv")
+    prev_precip_csv_file_path = path.join(Config.BASE_DIR, "prev_precip.csv")
 
     click.echo("Adding Stations")
     with open(stations_csv_file_path, mode='r') as file:
@@ -73,6 +74,20 @@ def populate_db():
                 precip_rate=row['precip_rate'],
                 precip_accum=row['precip_accum'],
                 precip_time=row['precip_time']
+            )
+            new_precip.create()
+
+    click.echo("Adding Prev Precip")
+    with open(prev_precip_csv_file_path, mode='r') as file:
+        csv_reader = csv.DictReader(file)
+        # Iterate through each row in the CSV file
+        for row in csv_reader:
+            # Create a new Station instance for each row
+            new_precip = WeatherData(
+                station_id=row['station_id'],
+                prev_pa=row['precip_rate'],
+                last_pa_long=row['precip_accum'],
+                zero_start_time=row['']
             )
             new_precip.create()
     

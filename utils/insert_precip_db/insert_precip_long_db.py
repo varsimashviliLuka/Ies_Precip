@@ -1,24 +1,28 @@
-from os import WCONTINUED
-
-import pymysql
-from dotenv import load_dotenv
+import logging
+import sys
 import os
 import datetime
 
-load_dotenv(dotenv_path='/home/levany/PycharmProjects/Ies_Precip/.env')
+from src.models.weather import PrevPrecip
 
-MYSQL_HOST = os.getenv('MYSQL_HOST', 'default_host')
-MYSQL_DATABASE = os.getenv('MYSQL_DATABASE', 'default_database')
-MYSQL_USER = os.getenv('MYSQL_USER', 'default_user')
-MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD_TEMP', 'default_password')
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-def monitor_station_is_dry():
+from src import create_app
+from src.models import StationsDivPositions
+
+LOG_FILENAME = "insert_precip_long_db.log"
+logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+
+
+
+def station_is_dry():
     # ეს ფუნქცია აბრუნებს 1 - ს როდესაც pa 24 საათის განმავლობაში 0 -ს უდრის, და შემდგომ ამას ვიყენებთ pa_long ის დასარესეტებლად
-    global zero_start_time # es ukve raghac droa bazidan wamoghebuli
+    global zero_start_time # es ukve raghac droa bazidan wamoghebuli (precip_time)
     elapsed_time = datetime.datetime.now() - zero_start_time
     if elapsed_time >= datetime.timedelta(hours=24):
-        pa_long = 0
-    return pa_long
+        return 1
+    else:
+        return 0
 
 def new_day_initialized(pa, prev_pa):
     if pa < prev_pa:
@@ -27,107 +31,74 @@ def new_day_initialized(pa, prev_pa):
         return 0
 
 
-
+'''
+unda davwerot funqcia ramdenime edge case ze:
+1. rodesac shemovida --.-- ramdenjerme
+2. rodesac --.-- shemovida 24 saatze metxans
+3. ...
+'''
 
 def pa_long_calculator(pa):
     global pa_long, prev_pa
-    if new_day_initialized(pa,prev_pa) == 0 and pa >= prev_pa: # axali dghe ar dawyebula...
-        if monitor_station_is_dry()
-        pa_long = pa
-        prev_pa = pa
+    if pa >= prev_pa: # monacemebi chveulebrivad shemodis (normal case)
+        if station_is_dry():
+            pa_long = 0   # tu 24 saatis ganmavlobashi sadgurma ar daafiqsira wvima mashin davaresetoto pa_long
+            prev_pa = pa
+
     elif pa < prev_pa and pa > 0:
-         # ამ else-ის გააქტიურებისას იწყება ახალი დღე რადგან შემოსული pa < prev_pa, შესაბამისად ვიწყებთ pa_long += pa თვლას
-        temp_pa_long = pa_long + pa
+         # ამ elif-ის გააქტიურებისას იწყება ახალი დღე რადგან შემოსული pa < prev_pa, შესაბამისად ვიწყებთ pa_long += pa თვლას
+        last_pa_long = pa_long + pa
         prev_pa = pa
-        if pa_long < temp_pa_long:
-            pa_long = temp_pa_long
-    else: # როცა pa არი 0
-        if monitor_station_is_dry(pa):
-            pa_long = 0
-    return (pa_long)
+        pa_long = last_pa_long
 
-'''
-import pymysql
-from dotenv import load_dotenv
-import os
-import datetime
+# როდესაც pa იქნება 0 ან --.-- მაგ შემთხვევებს მთავარ ფუნქციაში განვიხილავთ
 
+station_dict = {}
 
-load_dotenv(dotenv_path='/home/levany/PycharmProjects/Ies_Precip/.env')
-
-MYSQL_HOST = os.getenv('MYSQL_HOST', 'default_host')
-MYSQL_DATABASE = os.getenv('MYSQL_DATABASE', 'default_database')
-MYSQL_USER = os.getenv('MYSQL_USER', 'default_user')
-MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD_TEMP', 'default_password')
-
-prev_pa = 0
-pa_long = 0
-zero_start_time = None
-
-def return_pa(pa):   # es funqcia gadaivlis {stations_div_positions}-s bazas da daabrunebs pa-s
-
-    return pa
-tempo = 3
-
-
-
-
-def monitor_station_is_dry(pa):
-    # ეს ფუნქცია აბრუნებს 1 - ს როდესაც pa 24 საათის განმავლობაში 0 -ს უდრის, და შემდგომ ამას ვიყენებთ pa_long ის დასარესეტებლად
-    global zero_start_time
-    if pa == 0:
-        if zero_start_time is None:
-            zero_start_time = datetime.datetime.now()  # იწყება 24 საათიანი ტაიმერი
+def fetch_stations():
+    global station_dict
+    station_dict = {}
+    try:
+        stations = StationsDivPositions.query.with_entities(
+            StationsDivPositions.station_id,
+            StationsDivPositions.precip_accum
+        ).all()
+        prev_stations = PrevPrecip.query.with_entities(
+            PrevPrecip.prev_pa,
+            PrevPrecip.last_pa_long,
+            PrevPrecip.zero_start_time
+        ).all()
+        if not stations:
+            logging.info("No stations found.")
+            return
         else:
-            elapsed_time = datetime.datetime.now() - zero_start_time
-            if elapsed_time >= datetime.timedelta(hours=24):
-                return 1  # როდესაც 24 საათი გავა დავაბრუნოთ 1
-    else:
-        zero_start_time = None  # დავარესეტოთ ტაიმერი როდესაც pa > 0
-    return False
+            print(stations)
+
+    except Exception as e:
+        logging.critical(f"სკრიპტის შესრულების დროს შეცდომა: {e}")
 
 
-def pa_long_calculator(pa):
-    pa = return_pa(tempo)
-    global pa_long, prev_pa
-    if pa >= prev_pa: #pa_long = 4.06, prev_pa = 4.06, pa = 0
-        pa_long = pa
-        prev_pa = pa
-    elif pa < prev_pa and pa > 0:
-         # ამ else-ის გააქტიურებისას იწყება ახალი დღე რადგან შემოსული pa < prev_pa, შესაბამისად ვიწყებთ pa_long += pa თვლას
-        temp_pa_long = pa_long + pa
-        prev_pa = pa
-        if pa_long < temp_pa_long:
-            pa_long = temp_pa_long
-    else: # როცა pa არი 0
-        if monitor_station_is_dry(pa):
-            pa_long = 0
-    return (pa_long)
+    for station in stations:
+        station_dict[station[0]] = station[1]
 
 
 
-try:
-    connection = pymysql.connect(
-        host=MYSQL_HOST,
-        user=MYSQL_USER,
-        password=MYSQL_PASSWORD,
-        database=MYSQL_DATABASE
-    )
-except Exception as err:
-    print(f"ბაზასთან კავშირი ვერ შედგა - {err}")
-    exit()
-
-cursor = connection.cursor()
-
-query = "SELECT precip_accum, station_id FROM weather_data"
-cursor.execute(query)
-rows = cursor.fetchall()
-
-for row in rows:
-    pa = row[0]
-
-
-cursor.close()
-connection.close()
 
 '''
+def fill_prev_pa():
+    prev_stations = PrevPrecip.query.with_entities(
+        PrevPrecip.prev_pa,
+        PrevPrecip.last_pa_long,
+        PrevPrecip.zero_start_time
+    ).all()
+    
+'''
+
+def main():
+    app = create_app()
+    with app.app_context():
+        stations = fetch_stations()
+
+
+if __name__ == "__main__":
+    main()
