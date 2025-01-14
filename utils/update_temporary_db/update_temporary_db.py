@@ -4,7 +4,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-from src.models import StationsDivPositions
+from src.models import DivPositions
 from src import create_app
 
 
@@ -15,6 +15,7 @@ logging.basicConfig(filename=LOG_FILENAME,level=logging.CRITICAL,format="%(ascti
 
 def modify_station_details(station_details):
     for station_detail in station_details:
+
          # http მოთხოვნას აგზავნის api-ზე რადგან წამოიღოს მონაცები
         response = requests.get(station_detail.stations.api)
 
@@ -23,8 +24,8 @@ def modify_station_details(station_details):
             logging.warning(f'დაკავშირება ვერ მოხერხდა {station_detail.stations.station_name} სადგურზე!')
 
             station_detail.first_div_height = 0.00
-            station_detail.precip_rate = "--,--"
-            station_detail.precip_accum = "--,--"
+            station_detail.precip_rate = "--:--"
+            station_detail.precip_accum = "--:--"
             station_detail.save()
             continue
     # სადგურთან კავშირის შემთხვევაში
@@ -62,8 +63,11 @@ def modify_station_details(station_details):
 def main():
     app = create_app()
     with app.app_context():
-        station_details = StationsDivPositions.query.all()
-        modify_station_details(station_details)
+        try:
+            station_details = DivPositions.query.all()
+            modify_station_details(station_details)
+        except Exception as e:
+            logging.critical(f"სკრიპტის შესრულების დროს შეცდომა: {e}")
 
 
 

@@ -17,14 +17,14 @@ class Stations(db.Model, BaseModel):
     weather_data = db.relationship('WeatherData', back_populates='stations')
     prev_precip = db.relationship('PrevPrecip', back_populates='stations')
 
-    stations_div_positions = db.relationship('StationsDivPositions', back_populates='stations')
+    div_positions = db.relationship('DivPositions', back_populates='stations')
 
     def __repr__(self):
         return f"<Station(id={self.id}, name={self.station_name})>"
     
 
-class StationsDivPositions(db.Model, BaseModel):
-    __tablename__ = 'stations_div_positions'
+class DivPositions(db.Model, BaseModel):
+    __tablename__ = 'div_positions'
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
@@ -50,7 +50,7 @@ class StationsDivPositions(db.Model, BaseModel):
     top_bottom = db.Column(db.Float, nullable=False)
 
     # Relationship with WeatherData
-    stations = db.relationship('Stations', back_populates='stations_div_positions')
+    stations = db.relationship('Stations', back_populates='div_positions')
 
     def __repr__(self):
         return f"<Station(id={self.id}, name={self.station_id})>"

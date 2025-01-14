@@ -4,7 +4,7 @@ import csv
 from os import path
 
 from src.extensions import db
-from src.models import Stations, WeatherData, User, Role, StationsDivPositions
+from src.models import Stations, WeatherData, User, Role, DivPositions
 from src import Config
 
 
@@ -45,7 +45,7 @@ def populate_db():
         # Iterate through each row in the CSV file
         for row in csv_reader:
             # Create a new Station instance for each row
-            new_station_div_position = StationsDivPositions(
+            new_station_div_position = DivPositions(
                 station_id=Stations.query.filter_by(api=row['api']).first().id,
                 static_px = row['static_px'],
                 left_right = row['left_right'],
