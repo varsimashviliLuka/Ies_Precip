@@ -4,8 +4,9 @@ import csv
 from os import path
 
 from src.extensions import db
-from src.models import Stations, WeatherData, User, Role, DivPositions
+from src.models import Stations, WeatherData, User, Role, DivPositions, PrevPrecip
 from src import Config
+
 
 
 @click.command("init_db")
@@ -83,13 +84,13 @@ def populate_db():
         # Iterate through each row in the CSV file
         for row in csv_reader:
             # Create a new Station instance for each row
-            new_precip = WeatherData(
+            new_prev_precip = PrevPrecip(
                 station_id=row['station_id'],
-                prev_pa=row['precip_rate'],
-                last_pa_long=row['precip_accum'],
-                zero_start_time=row['']
+                prev_pa=row['prev_pa'],
+                last_pa_long=row['last_pa_long'],
+                zero_start_time=row['zero_start_time']
             )
-            new_precip.create()
+            new_prev_precip.create()
     
     click.echo("Creating Role")
     role = Role(name="Admin", is_admin=True)
