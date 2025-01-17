@@ -30,3 +30,5 @@ class PrevPrecip(db.Model, BaseModel):
     zero_start_time = db.Column(db.DateTime, nullable=False)
 
     stations = db.relationship('Stations', back_populates='prev_precip')
+
+
