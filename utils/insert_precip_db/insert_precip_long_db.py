@@ -1,97 +1,84 @@
-import pymysql
-from dotenv import load_dotenv
+import logging
+import sys
 import os
 import datetime
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-load_dotenv(dotenv_path='/home/levany/PycharmProjects/Ies_Precip/.env')
+from src import create_app
+from src.models import DivPositions, PrevPrecip
 
-MYSQL_HOST = os.getenv('MYSQL_HOST', 'default_host')
-MYSQL_DATABASE = os.getenv('MYSQL_DATABASE', 'default_database')
-MYSQL_USER = os.getenv('MYSQL_USER', 'default_user')
-MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD_TEMP', 'default_password')
-
-
-def return_pa(pa):   # es funqcia gadaivlis {stations_div_positions}-s bazas da daabrunebs pa-s
-####
-#
-#
-#
-#
-#
-
-    return pa
+LOG_FILENAME = "insert_precip_long_db.log"
+logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 
 
+def fetch_pa(): # შემდეგ ფუნქციას მონაცემები მოაქვს prev_precip & div_positions მონაცემთა ბაზებიდან
 
-
-
-
-def monitor_station_is_dry(pa):
-    # ეს ფუნქცია აბრუნებს 1 - ს როდესაც pa 24 საათის განმავლობაში 0 -ს უდრის, და შემდგომ ამას ვიყენებთ pa_long ის დასარესეტებლად
-    zero_start_time = None
-    if pa == 0:
-        if zero_start_time is None:
-            zero_start_time = datetime.datetime.now()  # იწყება 24 საათიანი ტაიმერი
+    try:
+        stations_pa = DivPositions.query.all()
+        prev_stations = PrevPrecip.query.all()
+        if not stations_pa or not prev_stations:
+            logging.info("No stations found.")
+            return None, None
         else:
+            return stations_pa, prev_stations
+
+    except Exception as e:
+        logging.critical(f"სკრიპტის შესრულების დროს შეცდომა: {e}")
+        return None, None
+
+# ეს ფუნქცია ითვლის pa_long-ს  ქვემოთ ჩამოთვლილი მონაცემების გამოყენებით
+def calc_pa_long(stations_pa, prev_stations):
+    for station, prev_station in zip(stations_pa, prev_stations):
+        pa = station.precip_accum
+        pa_long = station.precip_accum_long
+        prev_pa = prev_station.prev_pa
+        zero_start_time = prev_station.zero_start_time
+        last_pa_long = prev_station.last_pa_long
+
+        # ეს არის ალგორითმი რომელიც ითვლის pa_long ს.
+        if pa != '--:--':
+            pa = float(pa)
+
+        if (pa == 0 or pa == '--:--') and prev_pa !=0:
+            zero_start_time = datetime.datetime.now()
+            prev_pa = 0.0
+
+        elif (pa == 0 or pa == '--:--') and prev_pa == 0:
             elapsed_time = datetime.datetime.now() - zero_start_time
+            prev_pa = 0.0
             if elapsed_time >= datetime.timedelta(hours=24):
-                return 1  # როდესაც 24 საათი გავა დავაბრუნოთ 1
-    else:
-        zero_start_time = None  # დავარესეტოთ ტაიმერი როდესაც pa > 0
-    return False
-
-
-
-list_of_pa_longs = []
-
-def pa_long_calculator(pa):
-    pa = return_pa()
-    prev_pa = 0
-    while pa >= prev_pa:
-        pa_long = pa
-        prev_pa = pa
-
-
-        if pa < prev_pa:
-            if monitor_station_is_dry(pa):
                 pa_long = 0
-            else:
-                while pa >= prev_pa:
-                    temp_pa_long = pa_long + pa
-                    if pa_long != temp_pa_long:
-                        pa_long = temp_pa_long
-                        # ეხა დასაწერი მაქ pa_long ის ზრდა, როდესაც 1 დღის ლუპი მორჩა და ახალი დღის მონაცემებმა დაიწყეს შემოსვლა
-                        # ფორმულა უნდა იყოs - - - pa_long + pa - - -
-                        # ამ დროს იწყება ახალი 24 საათი, pa რესეტდება და მისი ათვლა თავიდან იწყება
-                        # ახლა მნიშვნელოვანია სწორად გავწერო კოდი რომ თუ შემოვიდა 0 ები გაჩეკოს monitor_station_if_dry ფუნქცია
-                        #  თუ მან დააბრუნა 0, მაშინ გააგრძელოს pa_long ის სწორად ათვლა
-                        # აქამდე ათვლილიც უნდა დაიმხასოვროს და ძველ pa_long - ს ახალი და ახალი pa ები უმატოს pa_long + pa
-    if pa == 0:
-        if monitor_station_is_dry(pa):
-            pa_long = 0
+                zero_start_time = datetime.datetime.now()
 
-    return (pa_long)
+        elif pa >= prev_pa:
+            pa_long = pa + last_pa_long
+            prev_pa = pa
 
+        elif 0 < pa < prev_pa:
+            last_pa_long = pa_long
+            pa_long = last_pa_long + pa
+            prev_pa = pa
 
+        if station:
+            station.precip_accum_long = pa_long
+            station.save()
+        if prev_station:
+            prev_station.prev_pa = prev_pa
+            prev_station.zero_start_time = zero_start_time
+            prev_station.last_pa_long = last_pa_long
+            prev_station.save()
 
-try:
-    connection = pymysql.connect(
-        host=MYSQL_HOST,
-        user=MYSQL_USER,
-        password=MYSQL_PASSWORD,
-        database=MYSQL_DATABASE
-    )
-except Exception as err:
-    print(f"ბაზასთან კავშირი ვერ შედგა - {err}")
+def main():
+    app = create_app()
+    with app.app_context():
+        stations_pa, prev_stations = fetch_pa()
+        if stations_pa is None or prev_stations is None:
+            logging.error("Failed to fetch data. Exiting.")
+            return
 
-cursor = connection.cursor()
+        # Perform calculations
+        calc_pa_long(stations_pa, prev_stations)
 
-query = "SELECT precip_accum, station_id FROM weather_data"
-cursor.execute(query)
-rows = cursor.fetchall()
-
-
-
-cursor.close()
-connection.close()
+if __name__ == "__main__":
+    main()
