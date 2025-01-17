@@ -122,7 +122,7 @@ def populate_db():
     )
     admin_user.create()
 
-    click.echo("Frist Tables Created")
+    click.echo("First Tables Created")
 
 @click.command("insert_db")
 @with_appcontext
