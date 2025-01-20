@@ -14,7 +14,10 @@ RUN pip install -r requirements.txt
 RUN chmod +x /app/flask_app.sh
 RUN chmod +x /app/run_scheduler.sh
 
+# საჭირო იქნება, რომ გადაიტანოთ ლოგების ფაილი
+RUN mkdir -p /app/logs
+
 # 5000 პორტის გახსნა
 EXPOSE 5000
 
-CMD ["uwsgi", "uwsgi.ini"]
+CMD ["sh", "-c", "./run_scheduler.sh & uwsgi uwsgi.ini"]
