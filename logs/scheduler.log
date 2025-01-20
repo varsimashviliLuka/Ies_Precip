@@ -1,0 +1,353 @@
+2025-01-20 16:28:16,413 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 16:28:16,414 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 16:28:16,414 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 16:28:16,414 - INFO - Added job "update_temporary_db" to job store "default"
+2025-01-20 16:28:16,415 - INFO - Added job "insert_precip_long_db" to job store "default"
+2025-01-20 16:28:16,415 - INFO - Added job "insert_precip_db" to job store "default"
+2025-01-20 16:28:16,415 - INFO - Scheduler started
+2025-01-20 16:29:16,424 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:29:16 +04)" (scheduled at 2025-01-20 16:29:16.413588+04:00)
+2025-01-20 16:29:33,045 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:30:16 +04)" executed successfully
+2025-01-20 16:29:33,046 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:30:16,424 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:31:16 +04)" (scheduled at 2025-01-20 16:30:16.413588+04:00)
+2025-01-20 16:30:16,425 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:32:16 +04)" (scheduled at 2025-01-20 16:30:16.413939+04:00)
+2025-01-20 16:30:16,426 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:32:16 +04)" (scheduled at 2025-01-20 16:30:16.414156+04:00)
+2025-01-20 16:30:20,843 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:32:16 +04)" executed successfully
+2025-01-20 16:30:20,843 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:30:27,130 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:32:16 +04)" executed successfully
+2025-01-20 16:30:27,131 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:30:28,227 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:31:16 +04)" executed successfully
+2025-01-20 16:30:28,233 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:31:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:32:16 +04)" (scheduled at 2025-01-20 16:31:16.413588+04:00)
+2025-01-20 16:31:31,391 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:32:16 +04)" executed successfully
+2025-01-20 16:31:31,402 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:32:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:33:16 +04)" (scheduled at 2025-01-20 16:32:16.413588+04:00)
+2025-01-20 16:32:16,435 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:34:16 +04)" (scheduled at 2025-01-20 16:32:16.413939+04:00)
+2025-01-20 16:32:16,440 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:34:16 +04)" (scheduled at 2025-01-20 16:32:16.414156+04:00)
+2025-01-20 16:32:20,555 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:34:16 +04)" executed successfully
+2025-01-20 16:32:20,561 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:32:28,454 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:34:16 +04)" executed successfully
+2025-01-20 16:32:28,475 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:32:28,924 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:33:16 +04)" executed successfully
+2025-01-20 16:32:28,930 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:33:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:34:16 +04)" (scheduled at 2025-01-20 16:33:16.413588+04:00)
+2025-01-20 16:33:31,660 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:34:16 +04)" executed successfully
+2025-01-20 16:33:31,671 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:34:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:35:16 +04)" (scheduled at 2025-01-20 16:34:16.413588+04:00)
+2025-01-20 16:34:16,435 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:36:16 +04)" (scheduled at 2025-01-20 16:34:16.413939+04:00)
+2025-01-20 16:34:16,445 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:36:16 +04)" (scheduled at 2025-01-20 16:34:16.414156+04:00)
+2025-01-20 16:34:20,771 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:36:16 +04)" executed successfully
+2025-01-20 16:34:20,787 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:34:27,293 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:35:16 +04)" executed successfully
+2025-01-20 16:34:27,298 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:34:27,595 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:36:16 +04)" executed successfully
+2025-01-20 16:34:27,595 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:35:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:36:16 +04)" (scheduled at 2025-01-20 16:35:16.413588+04:00)
+2025-01-20 16:35:33,147 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:36:16 +04)" executed successfully
+2025-01-20 16:35:33,147 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:36:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:37:16 +04)" (scheduled at 2025-01-20 16:36:16.413588+04:00)
+2025-01-20 16:36:16,450 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:38:16 +04)" (scheduled at 2025-01-20 16:36:16.413939+04:00)
+2025-01-20 16:36:16,452 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:38:16 +04)" (scheduled at 2025-01-20 16:36:16.414156+04:00)
+2025-01-20 16:36:20,423 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:38:16 +04)" executed successfully
+2025-01-20 16:36:20,423 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:36:27,885 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:37:16 +04)" executed successfully
+2025-01-20 16:36:27,886 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:36:28,511 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:38:16 +04)" executed successfully
+2025-01-20 16:36:28,516 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:37:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:38:16 +04)" (scheduled at 2025-01-20 16:37:16.413588+04:00)
+2025-01-20 16:37:31,695 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:38:16 +04)" executed successfully
+2025-01-20 16:37:31,701 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:38:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:39:16 +04)" (scheduled at 2025-01-20 16:38:16.413588+04:00)
+2025-01-20 16:38:16,429 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:40:16 +04)" (scheduled at 2025-01-20 16:38:16.413939+04:00)
+2025-01-20 16:38:16,439 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:40:16 +04)" (scheduled at 2025-01-20 16:38:16.414156+04:00)
+2025-01-20 16:38:20,198 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:40:16 +04)" executed successfully
+2025-01-20 16:38:20,200 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:38:27,207 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:39:16 +04)" executed successfully
+2025-01-20 16:38:27,214 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:38:27,256 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:40:16 +04)" executed successfully
+2025-01-20 16:38:27,257 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:39:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:40:16 +04)" (scheduled at 2025-01-20 16:39:16.413588+04:00)
+2025-01-20 16:39:38,653 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:40:16 +04)" executed successfully
+2025-01-20 16:39:38,663 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:40:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:41:16 +04)" (scheduled at 2025-01-20 16:40:16.413588+04:00)
+2025-01-20 16:40:16,440 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:42:16 +04)" (scheduled at 2025-01-20 16:40:16.413939+04:00)
+2025-01-20 16:40:16,456 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:42:16 +04)" (scheduled at 2025-01-20 16:40:16.414156+04:00)
+2025-01-20 16:40:19,947 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:42:16 +04)" executed successfully
+2025-01-20 16:40:19,947 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:40:28,722 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:42:16 +04)" executed successfully
+2025-01-20 16:40:28,745 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:40:34,508 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:41:16 +04)" executed successfully
+2025-01-20 16:40:34,524 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:41:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:42:16 +04)" (scheduled at 2025-01-20 16:41:16.413588+04:00)
+2025-01-20 16:41:32,990 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:42:16 +04)" executed successfully
+2025-01-20 16:41:33,005 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:42:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:43:16 +04)" (scheduled at 2025-01-20 16:42:16.413588+04:00)
+2025-01-20 16:42:16,434 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:44:16 +04)" (scheduled at 2025-01-20 16:42:16.413939+04:00)
+2025-01-20 16:42:16,445 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:44:16 +04)" (scheduled at 2025-01-20 16:42:16.414156+04:00)
+2025-01-20 16:42:20,853 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:44:16 +04)" executed successfully
+2025-01-20 16:42:20,853 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:42:30,763 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:43:16 +04)" executed successfully
+2025-01-20 16:42:30,780 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:42:31,232 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:44:16 +04)" executed successfully
+2025-01-20 16:42:31,248 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:43:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:44:16 +04)" (scheduled at 2025-01-20 16:43:16.413588+04:00)
+2025-01-20 16:43:34,677 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:44:16 +04)" executed successfully
+2025-01-20 16:43:34,693 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:44:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:45:16 +04)" (scheduled at 2025-01-20 16:44:16.413588+04:00)
+2025-01-20 16:44:16,440 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:46:16 +04)" (scheduled at 2025-01-20 16:44:16.413939+04:00)
+2025-01-20 16:44:16,455 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:46:16 +04)" (scheduled at 2025-01-20 16:44:16.414156+04:00)
+2025-01-20 16:44:20,628 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:46:16 +04)" executed successfully
+2025-01-20 16:44:20,652 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:44:28,224 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:45:16 +04)" executed successfully
+2025-01-20 16:44:28,235 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:44:28,730 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:46:16 +04)" executed successfully
+2025-01-20 16:44:28,746 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:45:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:46:16 +04)" (scheduled at 2025-01-20 16:45:16.413588+04:00)
+2025-01-20 16:45:35,420 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:46:16 +04)" executed successfully
+2025-01-20 16:45:35,436 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:46:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:47:16 +04)" (scheduled at 2025-01-20 16:46:16.413588+04:00)
+2025-01-20 16:46:16,440 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:48:16 +04)" (scheduled at 2025-01-20 16:46:16.413939+04:00)
+2025-01-20 16:46:16,451 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:48:16 +04)" (scheduled at 2025-01-20 16:46:16.414156+04:00)
+2025-01-20 16:46:20,533 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:48:16 +04)" executed successfully
+2025-01-20 16:46:20,550 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:46:27,887 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:48:16 +04)" executed successfully
+2025-01-20 16:46:27,892 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:46:28,313 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:47:16 +04)" executed successfully
+2025-01-20 16:46:28,329 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:47:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:48:16 +04)" (scheduled at 2025-01-20 16:47:16.413588+04:00)
+2025-01-20 16:47:32,542 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:48:16 +04)" executed successfully
+2025-01-20 16:47:32,553 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:48:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:49:16 +04)" (scheduled at 2025-01-20 16:48:16.413588+04:00)
+2025-01-20 16:48:16,435 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:50:16 +04)" (scheduled at 2025-01-20 16:48:16.413939+04:00)
+2025-01-20 16:48:16,440 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:50:16 +04)" (scheduled at 2025-01-20 16:48:16.414156+04:00)
+2025-01-20 16:48:20,821 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:50:16 +04)" executed successfully
+2025-01-20 16:48:20,822 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:48:29,813 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:49:16 +04)" executed successfully
+2025-01-20 16:48:29,830 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:48:30,282 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:50:16 +04)" executed successfully
+2025-01-20 16:48:30,282 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:49:16,430 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:50:16 +04)" (scheduled at 2025-01-20 16:49:16.413588+04:00)
+2025-01-20 16:49:35,558 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:50:16 +04)" executed successfully
+2025-01-20 16:49:35,563 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:50:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:51:16 +04)" (scheduled at 2025-01-20 16:50:16.413588+04:00)
+2025-01-20 16:50:16,434 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:52:16 +04)" (scheduled at 2025-01-20 16:50:16.413939+04:00)
+2025-01-20 16:50:16,445 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:52:16 +04)" (scheduled at 2025-01-20 16:50:16.414156+04:00)
+2025-01-20 16:50:19,854 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:52:16 +04)" executed successfully
+2025-01-20 16:50:19,855 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:50:27,598 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:51:16 +04)" executed successfully
+2025-01-20 16:50:27,610 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:50:27,692 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:52:16 +04)" executed successfully
+2025-01-20 16:50:27,703 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:51:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:52:16 +04)" (scheduled at 2025-01-20 16:51:16.413588+04:00)
+2025-01-20 16:51:31,207 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:52:16 +04)" executed successfully
+2025-01-20 16:51:31,223 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:52:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:53:16 +04)" (scheduled at 2025-01-20 16:52:16.413588+04:00)
+2025-01-20 16:52:16,434 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:54:16 +04)" (scheduled at 2025-01-20 16:52:16.413939+04:00)
+2025-01-20 16:52:16,445 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:54:16 +04)" (scheduled at 2025-01-20 16:52:16.414156+04:00)
+2025-01-20 16:52:19,900 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:54:16 +04)" executed successfully
+2025-01-20 16:52:19,900 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:52:28,065 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:54:16 +04)" executed successfully
+2025-01-20 16:52:28,076 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:52:28,264 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:53:16 +04)" executed successfully
+2025-01-20 16:52:28,264 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:53:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:54:16 +04)" (scheduled at 2025-01-20 16:53:16.413588+04:00)
+2025-01-20 16:53:31,739 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:54:16 +04)" executed successfully
+2025-01-20 16:53:31,755 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:54:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:55:16 +04)" (scheduled at 2025-01-20 16:54:16.413588+04:00)
+2025-01-20 16:54:16,430 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:56:16 +04)" (scheduled at 2025-01-20 16:54:16.413939+04:00)
+2025-01-20 16:54:16,440 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:56:16 +04)" (scheduled at 2025-01-20 16:54:16.414156+04:00)
+2025-01-20 16:54:20,146 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:56:16 +04)" executed successfully
+2025-01-20 16:54:20,172 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:54:27,803 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:55:16 +04)" executed successfully
+2025-01-20 16:54:27,814 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:54:28,466 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:56:16 +04)" executed successfully
+2025-01-20 16:54:28,487 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:55:16,426 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:56:16 +04)" (scheduled at 2025-01-20 16:55:16.413588+04:00)
+2025-01-20 16:55:41,148 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:56:16 +04)" executed successfully
+2025-01-20 16:55:41,154 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:56:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:57:16 +04)" (scheduled at 2025-01-20 16:56:16.413588+04:00)
+2025-01-20 16:56:16,435 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:58:16 +04)" (scheduled at 2025-01-20 16:56:16.413939+04:00)
+2025-01-20 16:56:16,446 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:58:16 +04)" (scheduled at 2025-01-20 16:56:16.414156+04:00)
+2025-01-20 16:56:19,988 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:58:16 +04)" executed successfully
+2025-01-20 16:56:19,988 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:56:29,778 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:57:16 +04)" executed successfully
+2025-01-20 16:56:29,783 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:56:30,258 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 16:58:16 +04)" executed successfully
+2025-01-20 16:56:30,268 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:57:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:58:16 +04)" (scheduled at 2025-01-20 16:57:16.413588+04:00)
+2025-01-20 16:57:31,881 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:58:16 +04)" executed successfully
+2025-01-20 16:57:31,887 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:58:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:59:16 +04)" (scheduled at 2025-01-20 16:58:16.413588+04:00)
+2025-01-20 16:58:16,445 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:00:16 +04)" (scheduled at 2025-01-20 16:58:16.413939+04:00)
+2025-01-20 16:58:16,465 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:00:16 +04)" (scheduled at 2025-01-20 16:58:16.414156+04:00)
+2025-01-20 16:58:20,138 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:00:16 +04)" executed successfully
+2025-01-20 16:58:20,143 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 16:58:29,478 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 16:59:16 +04)" executed successfully
+2025-01-20 16:58:29,489 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 16:58:30,169 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:00:16 +04)" executed successfully
+2025-01-20 16:58:30,180 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 16:59:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:00:16 +04)" (scheduled at 2025-01-20 16:59:16.413588+04:00)
+2025-01-20 16:59:30,645 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:00:16 +04)" executed successfully
+2025-01-20 16:59:30,655 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:00:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:01:16 +04)" (scheduled at 2025-01-20 17:00:16.413588+04:00)
+2025-01-20 17:00:16,435 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:02:16 +04)" (scheduled at 2025-01-20 17:00:16.413939+04:00)
+2025-01-20 17:00:16,445 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:02:16 +04)" (scheduled at 2025-01-20 17:00:16.414156+04:00)
+2025-01-20 17:00:20,383 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:02:16 +04)" executed successfully
+2025-01-20 17:00:20,399 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 17:00:28,161 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:01:16 +04)" executed successfully
+2025-01-20 17:00:28,161 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:00:28,900 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:02:16 +04)" executed successfully
+2025-01-20 17:00:28,910 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 17:01:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:02:16 +04)" (scheduled at 2025-01-20 17:01:16.413588+04:00)
+2025-01-20 17:01:31,468 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:02:16 +04)" executed successfully
+2025-01-20 17:01:31,484 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:02:16,431 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:03:16 +04)" (scheduled at 2025-01-20 17:02:16.413588+04:00)
+2025-01-20 17:02:16,432 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:04:16 +04)" (scheduled at 2025-01-20 17:02:16.413939+04:00)
+2025-01-20 17:02:16,438 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:04:16 +04)" (scheduled at 2025-01-20 17:02:16.414156+04:00)
+2025-01-20 17:02:20,358 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:04:16 +04)" executed successfully
+2025-01-20 17:02:20,364 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 17:02:28,436 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:03:16 +04)" executed successfully
+2025-01-20 17:02:28,448 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:02:28,713 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:04:16 +04)" executed successfully
+2025-01-20 17:02:28,728 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 17:03:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:04:16 +04)" (scheduled at 2025-01-20 17:03:16.413588+04:00)
+2025-01-20 17:03:30,385 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:04:16 +04)" executed successfully
+2025-01-20 17:03:30,401 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:04:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:05:16 +04)" (scheduled at 2025-01-20 17:04:16.413588+04:00)
+2025-01-20 17:04:16,450 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:06:16 +04)" (scheduled at 2025-01-20 17:04:16.413939+04:00)
+2025-01-20 17:04:16,482 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:06:16 +04)" (scheduled at 2025-01-20 17:04:16.414156+04:00)
+2025-01-20 17:04:20,792 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:06:16 +04)" executed successfully
+2025-01-20 17:04:20,798 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 17:04:27,783 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:06:16 +04)" executed successfully
+2025-01-20 17:04:27,801 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 17:04:27,887 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:05:16 +04)" executed successfully
+2025-01-20 17:04:27,902 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:05:16,429 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:06:16 +04)" (scheduled at 2025-01-20 17:05:16.413588+04:00)
+2025-01-20 17:05:34,095 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:06:16 +04)" executed successfully
+2025-01-20 17:05:34,111 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:06:16,430 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:07:16 +04)" (scheduled at 2025-01-20 17:06:16.413588+04:00)
+2025-01-20 17:06:16,441 - INFO - Running job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:08:16 +04)" (scheduled at 2025-01-20 17:06:16.413939+04:00)
+2025-01-20 17:06:16,456 - INFO - Running job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:08:16 +04)" (scheduled at 2025-01-20 17:06:16.414156+04:00)
+2025-01-20 17:06:20,880 - INFO - Job "insert_precip_long_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:08:16 +04)" executed successfully
+2025-01-20 17:06:20,886 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 17:06:30,584 - INFO - Job "insert_precip_db (trigger: interval[0:02:00], next run at: 2025-01-20 17:08:16 +04)" executed successfully
+2025-01-20 17:06:30,595 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 17:06:34,127 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:07:16 +04)" executed successfully
+2025-01-20 17:06:34,143 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:06:43,457 - INFO - Scheduler has been shut down
+2025-01-20 17:10:36,748 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 17:10:36,749 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 17:10:36,749 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 17:10:36,750 - INFO - Added job "update_temporary_db" to job store "default"
+2025-01-20 17:10:36,750 - INFO - Added job "insert_precip_long_db" to job store "default"
+2025-01-20 17:10:36,750 - INFO - Added job "insert_precip_db" to job store "default"
+2025-01-20 17:10:36,750 - INFO - Scheduler started
+2025-01-20 17:11:36,759 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:11:36 +04)" (scheduled at 2025-01-20 17:11:36.748835+04:00)
+2025-01-20 17:11:52,369 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:12:36 +04)" executed successfully
+2025-01-20 17:11:52,385 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:12:36,764 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:13:36 +04)" (scheduled at 2025-01-20 17:12:36.748835+04:00)
+2025-01-20 17:12:51,470 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:13:36 +04)" executed successfully
+2025-01-20 17:12:51,475 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:13:36,764 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:14:36 +04)" (scheduled at 2025-01-20 17:13:36.748835+04:00)
+2025-01-20 17:13:52,125 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:14:36 +04)" executed successfully
+2025-01-20 17:13:52,135 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:14:36,759 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:15:36 +04)" (scheduled at 2025-01-20 17:14:36.748835+04:00)
+2025-01-20 17:14:36,764 - INFO - Running job "insert_precip_long_db (trigger: interval[0:04:00], next run at: 2025-01-20 17:14:36 +04)" (scheduled at 2025-01-20 17:14:36.749188+04:00)
+2025-01-20 17:14:40,881 - INFO - Job "insert_precip_long_db (trigger: interval[0:04:00], next run at: 2025-01-20 17:18:36 +04)" executed successfully
+2025-01-20 17:14:40,881 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 17:14:51,950 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:15:36 +04)" executed successfully
+2025-01-20 17:14:51,955 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:15:36,764 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:16:36 +04)" (scheduled at 2025-01-20 17:15:36.748835+04:00)
+2025-01-20 17:15:36,769 - INFO - Running job "insert_precip_db (trigger: interval[0:05:00], next run at: 2025-01-20 17:20:36 +04)" (scheduled at 2025-01-20 17:15:36.749391+04:00)
+2025-01-20 17:15:37,104 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 1
+2025-01-20 17:15:37,145 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 2
+2025-01-20 17:15:37,173 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 3
+2025-01-20 17:15:37,211 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 4
+2025-01-20 17:15:37,238 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 5
+2025-01-20 17:15:37,286 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 6
+2025-01-20 17:15:37,333 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 5
+2025-01-20 17:15:37,375 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 8
+2025-01-20 17:15:37,417 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 9
+2025-01-20 17:15:37,460 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 10
+2025-01-20 17:15:37,481 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 11
+2025-01-20 17:15:37,498 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 12
+2025-01-20 17:15:37,520 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 13
+2025-01-20 17:15:37,546 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 14
+2025-01-20 17:15:37,575 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 15
+2025-01-20 17:15:37,601 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 16
+2025-01-20 17:15:37,626 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 17
+2025-01-20 17:15:37,647 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 18
+2025-01-20 17:15:37,698 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 19
+2025-01-20 17:15:37,740 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 20
+2025-01-20 17:15:37,772 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 21
+2025-01-20 17:15:37,811 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 22
+2025-01-20 17:15:37,849 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 23
+2025-01-20 17:15:37,879 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 24
+2025-01-20 17:15:37,902 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 25
+2025-01-20 17:15:37,941 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 26
+2025-01-20 17:15:37,990 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 27
+2025-01-20 17:15:38,030 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 28
+2025-01-20 17:15:38,047 - INFO - Job "insert_precip_db (trigger: interval[0:05:00], next run at: 2025-01-20 17:20:36 +04)" executed successfully
+2025-01-20 17:15:38,047 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 17:15:51,685 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:16:36 +04)" executed successfully
+2025-01-20 17:15:51,700 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:16:36,764 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:17:36 +04)" (scheduled at 2025-01-20 17:16:36.748835+04:00)
+2025-01-20 17:16:50,366 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 17:16:50,366 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 17:16:50,366 - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-01-20 17:16:50,367 - INFO - Added job "update_temporary_db" to job store "default"
+2025-01-20 17:16:50,367 - INFO - Added job "insert_precip_long_db" to job store "default"
+2025-01-20 17:16:50,367 - INFO - Added job "insert_precip_db" to job store "default"
+2025-01-20 17:16:50,367 - INFO - Scheduler started
+2025-01-20 17:17:50,377 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:17:50 +04)" (scheduled at 2025-01-20 17:17:50.365977+04:00)
+2025-01-20 17:18:07,511 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:18:50 +04)" executed successfully
+2025-01-20 17:18:07,526 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:18:50,381 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:19:50 +04)" (scheduled at 2025-01-20 17:18:50.365977+04:00)
+2025-01-20 17:19:05,351 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:19:50 +04)" executed successfully
+2025-01-20 17:19:05,366 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:19:50,381 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:20:50 +04)" (scheduled at 2025-01-20 17:19:50.365977+04:00)
+2025-01-20 17:20:06,490 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:20:50 +04)" executed successfully
+2025-01-20 17:20:06,506 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:20:50,377 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:21:50 +04)" (scheduled at 2025-01-20 17:20:50.365977+04:00)
+2025-01-20 17:20:50,393 - INFO - Running job "insert_precip_long_db (trigger: interval[0:04:00], next run at: 2025-01-20 17:24:50 +04)" (scheduled at 2025-01-20 17:20:50.366314+04:00)
+2025-01-20 17:20:54,634 - INFO - Job "insert_precip_long_db (trigger: interval[0:04:00], next run at: 2025-01-20 17:24:50 +04)" executed successfully
+2025-01-20 17:20:54,644 - INFO - Job insert_precip_long_db completed successfully.
+2025-01-20 17:21:04,477 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:21:50 +04)" executed successfully
+2025-01-20 17:21:04,493 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:21:50,381 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:22:50 +04)" (scheduled at 2025-01-20 17:21:50.365977+04:00)
+2025-01-20 17:21:50,386 - INFO - Running job "insert_precip_db (trigger: interval[0:05:00], next run at: 2025-01-20 17:26:50 +04)" (scheduled at 2025-01-20 17:21:50.366517+04:00)
+2025-01-20 17:21:50,901 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 1
+2025-01-20 17:21:50,948 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 2
+2025-01-20 17:21:50,986 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 3
+2025-01-20 17:21:51,038 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 4
+2025-01-20 17:21:51,091 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 5
+2025-01-20 17:21:51,159 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 6
+2025-01-20 17:21:51,186 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 5
+2025-01-20 17:21:51,198 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 8
+2025-01-20 17:21:51,216 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 9
+2025-01-20 17:21:51,235 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 10
+2025-01-20 17:21:51,286 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 11
+2025-01-20 17:21:51,307 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 12
+2025-01-20 17:21:51,350 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 13
+2025-01-20 17:21:51,373 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 14
+2025-01-20 17:21:51,415 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 15
+2025-01-20 17:21:51,448 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 16
+2025-01-20 17:21:51,491 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 17
+2025-01-20 17:21:51,519 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 18
+2025-01-20 17:21:51,545 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 19
+2025-01-20 17:21:51,580 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 20
+2025-01-20 17:21:51,648 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 21
+2025-01-20 17:21:51,688 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 22
+2025-01-20 17:21:51,721 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 23
+2025-01-20 17:21:51,748 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 24
+2025-01-20 17:21:51,780 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 25
+2025-01-20 17:21:51,823 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 26
+2025-01-20 17:21:51,861 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 27
+2025-01-20 17:21:51,902 - INFO - მონაცემები ჩაწერილია სადგურისთვის: 28
+2025-01-20 17:21:51,918 - INFO - Job "insert_precip_db (trigger: interval[0:05:00], next run at: 2025-01-20 17:26:50 +04)" executed successfully
+2025-01-20 17:21:51,934 - INFO - Job insert_precip_db completed successfully.
+2025-01-20 17:22:04,695 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:22:50 +04)" executed successfully
+2025-01-20 17:22:04,706 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:22:50,381 - INFO - Running job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:23:50 +04)" (scheduled at 2025-01-20 17:22:50.365977+04:00)
+2025-01-20 17:23:04,645 - INFO - Job "update_temporary_db (trigger: interval[0:01:00], next run at: 2025-01-20 17:23:50 +04)" executed successfully
+2025-01-20 17:23:04,657 - INFO - Job update_temporary_db completed successfully.
+2025-01-20 17:23:49,756 - INFO - Scheduler has been shut down
