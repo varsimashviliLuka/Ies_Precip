@@ -12,8 +12,6 @@ from src.models import User
 BLUEPRINTS = [filter_blueprint, auth_blueprint]
 COMMANDS = [init_db, populate_db, insert_db]
 
-
-
 def create_app():
     app = Flask(__name__)
     CORS(app)
@@ -26,7 +24,7 @@ def create_app():
     register_extensions(app)
     register_blueprints(app)
     register_commands(app)
-
+    register_error_handlers(app)
 
     return app
 
@@ -75,3 +73,4 @@ def register_error_handlers(app):
     def page_not_found(e):
         # You can return a JSON response or render a custom HTML template
         return render_template('404.html'), 404
+    

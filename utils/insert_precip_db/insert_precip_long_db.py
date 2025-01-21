@@ -6,26 +6,7 @@ import datetime
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from src import create_app
-from src.models import DivPositions, PrevPrecip
-
-LOG_FILENAME = "insert_precip_long_db.log"
-logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
-
-
-def fetch_pa(): # შემდეგ ფუნქციას მონაცემები მოაქვს prev_precip & div_positions მონაცემთა ბაზებიდან
-
-    try:
-        stations_pa = DivPositions.query.all()
-        prev_stations = PrevPrecip.query.all()
-        if not stations_pa or not prev_stations:
-            logging.info("No stations found.")
-            return None, None
-        else:
-            return stations_pa, prev_stations
-
-    except Exception as e:
-        logging.critical(f"სკრიპტის შესრულების დროს შეცდომა: {e}")
-        return None, None
+from src.models import DivPositions, PrevPrecip, WeatherData
 
 # ეს ფუნქცია ითვლის pa_long-ს  ქვემოთ ჩამოთვლილი მონაცემების გამოყენებით
 def calc_pa_long(stations_pa, prev_stations):
@@ -69,16 +50,17 @@ def calc_pa_long(stations_pa, prev_stations):
             prev_station.last_pa_long = last_pa_long
             prev_station.save()
 
-def main():
+def insert_precip_long_db():
     app = create_app()
     with app.app_context():
-        stations_pa, prev_stations = fetch_pa()
-        if stations_pa is None or prev_stations is None:
-            logging.error("Failed to fetch data. Exiting.")
-            return
+        try:
+            stations_pa = DivPositions.query.all()
+            prev_stations = PrevPrecip.query.all()
+            calc_pa_long(stations_pa, prev_stations)
+            logging.debug(f'pa_long-ის მონაცემი წარმატებით დაემატა.')
 
-        # Perform calculations
-        calc_pa_long(stations_pa, prev_stations)
-
+        except Exception as e:
+            logging.critical(f"სკრიპტის შესრულების დროს შეცდომა: {e}")
+        
 if __name__ == "__main__":
-    main()
+    insert_precip_long_db()
