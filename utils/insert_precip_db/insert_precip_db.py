@@ -1,6 +1,5 @@
-import requests
 import logging
-import datetime
+from datetime import datetime, timedelta
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
@@ -44,7 +43,7 @@ def insert_precip_data(precip_data):
                     precip_rate=data.precip_rate,
                     precip_accum=data.precip_accum,
                     precip_accum_long=data.precip_accum_long,
-                    precip_time=datetime.datetime.now()
+                    precip_time=datetime.now() + timedelta(hours=4)
                 )
                 new_record.create()
                 logging.debug(f"მონაცემები ჩაწერილია სადგურისთვის: {data.station_id}")

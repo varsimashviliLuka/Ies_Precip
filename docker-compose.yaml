@@ -11,6 +11,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
+      - ./logs:/app/logs
       - ./migrations:/app/migrations  # ბაზის მიგრაციის ფაილების დირექტორია
     restart: always  # კონტეინერი ავტომატურად გადატვირთოს, თუ გათიშულია.
     depends_on:
