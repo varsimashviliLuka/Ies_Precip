@@ -18,7 +18,7 @@ rotating_handler.setFormatter(formatter)
 
 # Set up the root logger
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.WARNING)
 logger.addHandler(rotating_handler)
 
 def start_scheduler():
