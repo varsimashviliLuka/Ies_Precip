@@ -48,7 +48,7 @@ def populate_db():
         for row in csv_reader:
             # Create a new Station instance for each row
             new_station_div_position = DivPositions(
-                station_id=Stations.query.filter_by(api=row['api']).first().id,
+                station_id=Stations.query.filter_by(url=row['Url']).first().id,
                 static_px = row['static_px'],
                 left_right = row['left_right'],
                 line_rotate = row['line_rotate'],
