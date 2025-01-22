@@ -8,6 +8,7 @@ div_positions_ns = api.namespace('Stations Div Positions', description='API ს�
 div_positions_model = div_positions_ns.model('Div Positions', {
     'PRECIP_ACCUM': fields.String(required=True, description='აკუმულაცია', example='0.99'),
     'PRECIP_RATE': fields.String(required=True, description='ინტენსივობა', example='0.00'),
+    'PRECIP_ACCUM_LONG': fields.String(required=True, description='გრძელი აკუმულაცია', example='0.00'),
     'Station': fields.String(required=True, description='სადგურის სახელი', example='2902 Rioni - IGUMAT4'),
     'Url': fields.String(required=True, description='სადგურის Url', example='https://www.wunderground.com/dashboard/pws/IGUMAT4'),
     'api': fields.String(required=True, description='სადგურის API', example='https://api.weather.com/v2/pws/observations/current?apiKey=e1f10a1e78da46f5b10a1e78da....'),

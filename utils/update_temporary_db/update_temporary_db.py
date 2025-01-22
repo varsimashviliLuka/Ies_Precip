@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 
 from src.models import DivPositions
 from src import create_app
-
+# from src.config import TestConfig
 
 def modify_station_details(station_details):
     for station_detail in station_details:
@@ -30,7 +30,7 @@ def modify_station_details(station_details):
             precip_rate = data['observations'][0]['metric']['precipRate']
             precip_accum = data['observations'][0]['metric']['precipTotal']
             precip_rate = "{:.2f}".format(precip_rate)
-            precip_accum = float("{:.2f}".format(precip_accum))
+            precip_accum = float(precip_accum)
         except:
             logging.debug(f"json დან მონაცემების ამოღების დროს მოხდა შეცდომა {station_detail.stations.station_name}")
             continue
@@ -41,10 +41,10 @@ def modify_station_details(station_details):
         else:
             top_bottom = station_detail.static_px - precip_accum
             first_div_height = precip_accum
-        
+
         station_detail.first_div_height = first_div_height
         station_detail.top_bottom = top_bottom
-        station_detail.precip_accum = precip_accum
+        station_detail.precip_accum = f'{precip_accum:.2f}'
         station_detail.precip_rate = precip_rate
 
         station_detail.save()
@@ -53,6 +53,7 @@ def modify_station_details(station_details):
 
 
 def update_temporary_db():
+    # app = create_app(TestConfig)
     app = create_app()
     with app.app_context():
         try:

@@ -22,6 +22,7 @@ class DivPositionsApi(Resource):
             data = {
                 'PRECIP_ACCUM': i.precip_accum,
                 'PRECIP_RATE': i.precip_rate,
+                'PRECIP_ACCUM_LONG': i.precip_accum_long,
                 'Station': i.stations.station_name,
                 'Url': i.stations.url,
                 'api': i.stations.api,
