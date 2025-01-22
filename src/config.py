@@ -35,4 +35,10 @@ class Config(object):
     }
 
 
+class TestConfig(Config):
+
+    TESTING = True
+    WTF_CSRF_ENABLED = False
+
+    SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{Config.MYSQL_USER}:{Config.MYSQL_PASSWORD}@localhost/{Config.MYSQL_DATABASE}'
     
