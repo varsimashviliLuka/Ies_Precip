@@ -7,6 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 
 from src import create_app
 from src.models import DivPositions, PrevPrecip, WeatherData
+# from src.config import TestConfig
 
 # ეს ფუნქცია ითვლის pa_long-ს  ქვემოთ ჩამოთვლილი მონაცემების გამოყენებით
 def calc_pa_long(stations_pa, prev_stations):
@@ -42,7 +43,7 @@ def calc_pa_long(stations_pa, prev_stations):
             prev_pa = pa
 
         if station:
-            station.precip_accum_long = pa_long
+            station.precip_accum_long = f'{float(pa_long):.2f}'
             station.save()
         if prev_station:
             prev_station.prev_pa = prev_pa
@@ -51,6 +52,7 @@ def calc_pa_long(stations_pa, prev_stations):
             prev_station.save()
 
 def insert_precip_long_db():
+    # app = create_app(TestConfig)
     app = create_app()
     with app.app_context():
         try:

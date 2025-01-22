@@ -114,6 +114,7 @@ function updateData()
                     const second_div = document.createElement('div');
                     const p1 = document.createElement('p');
                     const p2 = document.createElement('p');
+                    const p3 = document.createElement('p');
                     const a = document.createElement('a');
                     a.setAttribute('href', item1.Url);
     
@@ -123,8 +124,10 @@ function updateData()
                     second_div.appendChild(a);
                     a.appendChild(p1);
                     a.appendChild(p2);
+                    a.appendChild(p3);
                     p1.innerHTML = `PR : ${item1.PRECIP_RATE }`;
                     p2.innerHTML = `PA : ${item1.PRECIP_ACCUM }`;
+                    p3.innerHTML = `PAL : ${item1.PRECIP_ACCUM_LONG }`;
                     first_div.className = "first_div";
     
                     first_div.id = item1.id;
