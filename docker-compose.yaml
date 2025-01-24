@@ -19,7 +19,7 @@ services:
     networks:
       - net  # სერვისის გაერთიანება იდენტურ ქსელში
     deploy:
-      replicas: 1
+      replicas: 2
 
   # Nginx სერვისი, რომელიც მოქმედებს როგორც ლოუდ ბალანსერი და რევერს-პროსი.
   nginx:
