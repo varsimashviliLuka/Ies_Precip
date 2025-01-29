@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <td>${item.precip_time}</td>
                                 <td>${item.precip_rate}</td>
                                 <td>${item.precip_accum}</td>
+                                <td>${item.precip_accum_long}</td>
                             </tr>
                         `;
                         precipDataTable.innerHTML += row;
