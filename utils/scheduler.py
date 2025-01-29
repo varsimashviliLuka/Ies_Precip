@@ -5,6 +5,8 @@ from insert_precip_db.insert_precip_db import insert_precip_db
 from apscheduler.events import EVENT_JOB_EXECUTED, EVENT_JOB_ERROR
 import logging
 from logging.handlers import RotatingFileHandler
+from datetime import datetime, timedelta
+from time import sleep
 
 # Set up logging for the scheduler
 LOG_FILENAME = 'logs/scheduler.log'
@@ -55,4 +57,24 @@ def job_listener(event):
         logging.info(f'Job {event.job_id} completed successfully.')
 
 if __name__ == '__main__':
-    start_scheduler()
+    can_run = False
+    try:
+        logging.debug(f'Try ბლოკში წარმატებით შევიდა პროგრამა')
+        while True:
+            logging.debug(f'While ბლოკში წარმატებით შევიდა პროგრამა')
+            current_time = datetime.now()
+
+            if current_time.minute % 10 in [0,5] and current_time.second < 45:
+                can_run = True
+                logging.debug(f'')
+                break
+            else:
+                logging.debug(f'1 წამიანი პაუზა')
+                sleep(1)
+    except:
+        logging.debug(f'Except ბლოკში შევიდა პროგრამა')
+        can_run = True
+
+    if can_run:
+        logging.debug(f'Scheduler წარმატებით გაეშვა, დაწყების დრო: {datetime.now()+timedelta(hours=4)}')
+        start_scheduler()
