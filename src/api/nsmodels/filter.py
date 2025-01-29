@@ -8,6 +8,7 @@ filter_model = filter_ns.model('Filters', {
     'station_id': fields.Integer(required=True, description='სადგურის ID', example=10),
     'precip_rate': fields.String(required=False, description='ნალექის მაჩვენებელი', example='1.19'),
     'precip_accum': fields.String(required=False, description='ნალექების დაგროვება', example='0.25'),
+    'precip_accum_long': fields.String(required=False, description='ნალექების დაგროვება', example='0.25'),
     'precip_time': fields.DateTime(required=True, description='მონაცემის თარიღი და დრო(YYYY-MM-DDTHH:MM:SS)', example='2024-12-05T01:30:13')
 })
 
