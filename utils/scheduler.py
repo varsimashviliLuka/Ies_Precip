@@ -59,20 +59,22 @@ def job_listener(event):
 if __name__ == '__main__':
     can_run = False
     try:
-        logging.debug(f'Try ბლოკში წარმატებით შევიდა პროგრამა')
-        while True:
-            logging.debug(f'While ბლოკში წარმატებით შევიდა პროგრამა')
-            current_time = datetime.now()
+        logging.debug('Try ბლოკში წარმატებით შევიდა პროგრამა')
+        
+        current_time = datetime.now()
+        next_run_minute = (current_time.minute // 5 + 1) * 5  # Find the next 5-minute mark
+        next_run_time = current_time.replace(minute=next_run_minute % 60, second=0, microsecond=0)
+        if next_run_minute >= 60:
+            next_run_time += timedelta(hours=1)
 
-            if current_time.minute % 10 in [0,5] and current_time.second < 45:
-                can_run = True
-                logging.debug(f'')
-                break
-            else:
-                logging.debug(f'1 წამიანი პაუზა')
-                sleep(1)
-    except:
-        logging.debug(f'Except ბლოკში შევიდა პროგრამა')
+        wait_seconds = (next_run_time - current_time).total_seconds()
+        logging.debug(f'მოიცდის {wait_seconds:.2f} წამი')
+
+        sleep(wait_seconds)  # Wait until the next valid execution time
+        can_run = True
+
+    except Exception as e:
+        logging.debug(f'Except ბლოკში შევიდა პროგრამა: {e}')
         can_run = True
 
     if can_run:
