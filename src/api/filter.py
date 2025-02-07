@@ -50,11 +50,15 @@ class FilterAPI(Resource):
         weather_data = WeatherData.query.filter(WeatherData.station_id==station_id,
                                             func.date(WeatherData.precip_time) == date,
                                             func.time(WeatherData.precip_time) >= start_time,
-                                            func.time(WeatherData.precip_time) <= end_time,
-                                            (extract('hour',WeatherData.precip_time) * 60 + extract('minute',WeatherData.precip_time)) % step_min == 0
-                                            ).all()
+                                            func.time(WeatherData.precip_time) <= end_time).all()
+        
         if not weather_data:
             return {"error": "მონაცემი ვერ მოიძებნა"}, 404
 
+        step = int(step_min/5)
+        filter_data = []
+        for i in range(0,len(weather_data),step):
+            filter_data.append(weather_data[i])
 
-        return weather_data, 200
+
+        return filter_data, 200
