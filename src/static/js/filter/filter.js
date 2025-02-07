@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 } else {
                     // Display a message if no data is returned
-                    const noDataRow = `<tr><td colspan="3" class="fw-bold fs-6">No data available for the selected filters.</td></tr>`;
+                    const noDataRow = `<tr><td colspan="4" class="fw-bold fs-6">No data available for the selected filters.</td></tr>`;
                     precipDataTable.innerHTML += noDataRow;
                 }
 
