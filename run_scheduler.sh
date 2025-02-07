@@ -1,5 +1,5 @@
 #!/bin/bash
 
 echo "run Scheduler"
-python utils/scheduler.py
+python tools/scheduler.py
 echo "==================================="
