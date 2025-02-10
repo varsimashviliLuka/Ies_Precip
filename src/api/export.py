@@ -4,23 +4,26 @@ from sqlalchemy import func
 
 from flask_jwt_extended import jwt_required
 
-from src.api.nsmodels import filter_ns, filter_parser, filter_model
+from src.api.nsmodels import export_ns, export_parser
 from src.models import WeatherData
+from src.config import Config
+
+import csv
+import os
 
 
-@filter_ns.route('/filter')
-@filter_ns.doc(responses={200: 'OK', 400: 'Invalid Argument', 401: 'JWT Token Expires', 403: 'Unauthorized', 404: 'Not Found'})
-class FilterAPI(Resource):
+
+@export_ns.route('/export')
+@export_ns.doc(responses={200: 'OK', 400: 'Invalid Argument', 401: 'JWT Token Expires', 403: 'Unauthorized', 404: 'Not Found'})
+class Export_API(Resource):
     @jwt_required()
-    @filter_ns.doc(security="JsonWebToken")
-    @filter_ns.doc(parser=filter_parser)
-    @filter_ns.marshal_with(filter_model)
+    @export_ns.doc(security="JsonWebToken")
+    @export_ns.doc(parser=export_parser)
     def post(self):
         '''გავფილტროთ მონაცემები სხვადასხვა პარამეტრებით'''
         # Parse the filter arguments
-        args = filter_parser.parse_args()
+        args = export_parser.parse_args()
 
-        # Extract filter parameters
         try:
             date = datetime.strptime(args['date'], '%Y-%m-%d').date()
         except ValueError:
@@ -58,5 +61,29 @@ class FilterAPI(Resource):
         step = int(step_min / 5)
         filter_data = [weather_data[i] for i in range(0, len(weather_data), step)]
 
+        # Create a unique filename for each request
+        file_name = f"{str(date)}.csv"
+        file_path = os.path.join(Config.EXPORT_DIR, file_name)
 
-        return filter_data, 200
+        # Create a CSV file and write the filtered data
+        with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
+            fieldnames = ["id", "station_id", "precip_time", "precip_rate", "precip_accum", "precip_accum_long"]
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            # Write the header
+            writer.writeheader()
+
+            # Write each row of data as a dictionary
+            for data in filter_data:
+                writer.writerow({
+                    "id": data.id,
+                    "station_id": data.station_id,
+                    "precip_time": data.precip_time,
+                    "precip_rate": data.precip_rate,
+                    "precip_accum": data.precip_accum,
+                    "precip_accum_long": data.precip_accum_long
+                })
+
+        # Respond with the file path or URL to access the file
+        export_url = f'/export/{file_name}'  # The URL to download the file
+        return export_url, 200
