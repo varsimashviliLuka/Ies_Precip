@@ -11,7 +11,7 @@ class Config(object):
     BASE_DIR = path.abspath(path.dirname(__file__) + sep + pardir)
     TEMPLATES_FOLDERS = 'src/templates'
     # Directory to export CSV files
-    EXPORT_DIR = os.path.join(BASE_DIR, 'src/export')
+    EXPORT_DIR = os.path.join(BASE_DIR, 'export')
 
     # Ensure the directory exists
     os.makedirs(EXPORT_DIR, exist_ok=True)

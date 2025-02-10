@@ -6,6 +6,7 @@
 
 {% block body %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/filter/filter.js') }}" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/filter/export.js') }}" defer></script>
 <div class="mt-5">
     <form id="filterDataForm" enctype="multipart/form-data">
         <div class="row d-flex justify-content-center align-items-center ">
@@ -52,6 +53,16 @@
             </div>
         </div>
     </form>
+
+    <!-- Button to open export modal-->
+    <button class="btn btn-sm btn-warning" onclick="openExportCSVModal()">Export CSV</button>
+
+    <!-- The openExportCSVModal -->
+    {% include "export.html" %}
+
+    <!-- Optional: You can add a loading spinner or message while the export is being processed -->
+    <div id="loadingMessage" style="display: none;">Processing export...</div>
+    
 
     <!-- for Precip Data -->
     <div id="precipDataTableContainer" class="table-responsive-xxl text-center mt-2" style="font-size: small;">

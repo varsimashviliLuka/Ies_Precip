@@ -1,0 +1,63 @@
+
+<!-- The Combined GeophysicSeismic Modal -->
+<div class="modal fade" id="ExportCSV" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Export CSV</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form class="row mt-2" id="ExportCSVForm" enctype="multipart/form-data">
+                    <div class="row d-flex justify-content-center align-items-center ">
+                        <div class="col-4 m-2">
+                            <div class="text-center">Select Any Station:</div>
+                            <select class="form-select text-center" id="stationSelect" name="station_id" required>
+                                <!-- Dynamically populate stations here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-4 m-2">
+                            <div class="text-center pt-2">Date:</div>
+                            <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
+                            <input type="date" class="text-center form-control form-control" id="filterDate" name="date" value="{{ today_date }}" required>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-5 m-2">
+                            <div class="text-center pt-2">Start Time (From):</div>
+                            <div class="text-center fw-lighter">HH:MM:SS (12-hour) "00:00 - 12:00   --  AM" </div>
+                            <input type="time" class="text-center form-control form-control" id="filterStartTime" name="start_time" step="1" value="00:00:00" required>
+                        </div>
+                        <div class="col-5 m-2">
+                            <div class="text-center pt-2">End Time (Until):</div>
+                            <div class="text-center fw-lighter">HH:MM:SS (12-hour) "12:00 - 24:00   --  PM"</div>
+                            <input type="time" class="text-center form-control form-control" id="filterEndTime" name="end_time" step="1" value="23:59:59" required>
+                        </div>
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="col-4 m-2">
+                                <div class="text-center">Select Any Step:</div>
+                                <select class="form-select text-center" id="stepMin" name="step_min" required>
+                                    <option selected value="5">5 Minutes</option>
+                                    <option value="10">10 Minutes</option>
+                                    <option value="30">30 Minutes</option>
+                                    <option value="60">1 Hour</option>
+                                    <option value="120">2 Hour</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="m-5 text-center">
+                            <button type="submit" class="btn btn-sm btn-primary">გადმოწერა</button>
+                            <button type="reset" class="btn btn-sm btn-secondary">გასუფთავება</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
