@@ -42,8 +42,6 @@ class FilterAPI(Resource):
         except ValueError:
             return {"error": "ფორმატის არასწორი ტიპი. გამოიყენეთ ციფრი/რიცხვი"}, 400
         
-        response_format = args.get('format', 'json')
-        
         if step_min % 5 != 0:
             return {"error": "დარწმუნდით, რომ მითითებული სტეპი იყოფა 5-ზე"}, 400
 
