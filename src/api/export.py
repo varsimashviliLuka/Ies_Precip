@@ -1,6 +1,7 @@
 from flask_restx import Resource
 from datetime import datetime
 from sqlalchemy import func
+from flask import send_file
 
 from flask_jwt_extended import jwt_required
 
@@ -62,7 +63,7 @@ class Export_API(Resource):
         filter_data = [weather_data[i] for i in range(0, len(weather_data), step)]
 
         # Create a unique filename for each request
-        file_name = f"{str(date)}.csv"
+        file_name = 'export.csv'
         file_path = os.path.join(Config.EXPORT_DIR, file_name)
 
         # Create a CSV file and write the filtered data
@@ -85,5 +86,9 @@ class Export_API(Resource):
                 })
 
         # Respond with the file path or URL to access the file
-        export_url = f'/export/{file_name}'  # The URL to download the file
-        return export_url, 200
+        try:
+            return send_file(file_path, as_attachment=True, download_name=file_name, mimetype='text/csv')
+        finally:
+            # Ensure that the file is deleted after download
+            if os.path.exists(file_path):
+                os.remove(file_path)
