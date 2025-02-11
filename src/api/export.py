@@ -2,6 +2,7 @@ from flask_restx import Resource
 from datetime import datetime
 from sqlalchemy import func
 from flask import send_file
+from collections import defaultdict
 
 from flask_jwt_extended import jwt_required
 
@@ -26,7 +27,11 @@ class Export_API(Resource):
         args = export_parser.parse_args()
 
         try:
-            date = datetime.strptime(args['date'], '%Y-%m-%d').date()
+            start_date = datetime.strptime(args['start_date'], '%Y-%m-%d').date()
+        except ValueError:
+            return {"error": "ფორმატის არასწორი ტიპი. გამოიყენეთ YYYY-MM-DD."}, 400
+        try:
+            end_date = datetime.strptime(args['end_date'], '%Y-%m-%d').date()
         except ValueError:
             return {"error": "ფორმატის არასწორი ტიპი. გამოიყენეთ YYYY-MM-DD."}, 400
         try:
@@ -42,25 +47,41 @@ class Export_API(Resource):
         except ValueError:
             return {"error": "ფორმატის არასწორი ტიპი. გამოიყენეთ ციფრი/რიცხვი"}, 400
         try:
-            station_id = int(args.get('station_id'))
+            station_ids = [int(x) for x in args['station_ids']]
         except ValueError:
             return {"error": "ფორმატის არასწორი ტიპი. გამოიყენეთ ციფრი/რიცხვი"}, 400
-        
-        response_format = args.get('format', 'json')
-        
+
         if step_min % 5 != 0:
             return {"error": "დარწმუნდით, რომ მითითებული სტეპი იყოფა 5-ზე"}, 400
+        
 
-        weather_data = WeatherData.query.filter(WeatherData.station_id == station_id,
-                                            func.date(WeatherData.precip_time) == date,
+
+        weather_data = WeatherData.query.filter(WeatherData.station_id.in_(station_ids),
+                                            func.date(WeatherData.precip_time) >= start_date,
+                                            func.date(WeatherData.precip_time) <= end_date,
                                             func.time(WeatherData.precip_time) >= start_time,
-                                            func.time(WeatherData.precip_time) <= end_time).all()
+                                            func.time(WeatherData.precip_time) <= end_time).order_by(WeatherData.station_id,WeatherData.precip_time).all()
+            
+
         
         if not weather_data:
             return {"error": "მონაცემი ვერ მოიძებნა"}, 404
+        
 
         step = int(step_min / 5)
-        filter_data = [weather_data[i] for i in range(0, len(weather_data), step)]
+
+
+        grouped_data = defaultdict(list)
+        for entry in weather_data:
+            grouped_data[entry.station_id].append(entry)
+
+        # Apply step filter within each station's dataset
+        filtered_data = []
+        for station, data in grouped_data.items():
+            filtered_data.extend(data[i] for i in range(0, len(data), step))
+
+        filtered_data.sort(key=lambda x: x.precip_time)
+
 
         # Create a unique filename for each request
         file_name = 'export.csv'
@@ -68,18 +89,17 @@ class Export_API(Resource):
 
         # Create a CSV file and write the filtered data
         with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ["id", "station_id", "precip_time", "precip_rate", "precip_accum", "precip_accum_long"]
+            fieldnames = ["precip_time", "station_name", "precip_rate", "precip_accum", "precip_accum_long"]
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
             # Write the header
             writer.writeheader()
 
             # Write each row of data as a dictionary
-            for data in filter_data:
+            for data in filtered_data:
                 writer.writerow({
-                    "id": data.id,
-                    "station_id": data.station_id,
                     "precip_time": data.precip_time,
+                    "station_name": data.stations.station_name,
                     "precip_rate": data.precip_rate,
                     "precip_accum": data.precip_accum,
                     "precip_accum_long": data.precip_accum_long
