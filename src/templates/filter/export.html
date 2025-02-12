@@ -28,23 +28,23 @@
                     <div class="col m-2">
                         <div class="text-center pt-2">Start Date (From):</div>
                         <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
-                        <input type="date" class="text-center form-control form-control" id="filterStartDate" name="start_date" value="{{ today_date }}" required>
+                        <input type="date" class="text-center form-control form-control" id="exportStartDate" name="start_date" value="{{ today_date }}" required>
                     </div>
                     <div class="col m-2">
                         <div class="text-center pt-2">Start Time (From):</div>
                         <div class="text-center fw-lighter">"00:00 - 12:00 -- AM (12-hour)" </div>
-                        <input type="time" class="text-center form-control form-control" id="filterStartTime" name="start_time" step="1" value="00:00:00" required>
+                        <input type="time" class="text-center form-control form-control" id="exportStartTime" name="start_time" step="1" value="00:00:00" required>
                     </div>
                     <div class="row">
                         <div class="col m-2">
                             <div class="text-center pt-2">End Date (Until):</div>
                             <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
-                            <input type="date" class="text-center form-control form-control" id="filterEndDate" name="end_date" value="{{ today_date }}" required>
+                            <input type="date" class="text-center form-control form-control" id="exportEndDate" name="end_date" value="{{ today_date }}" required>
                         </div>
                         <div class="col m-2">
                             <div class="text-center pt-2">End Time (Until):</div>
                             <div class="text-center fw-lighter">"12:00 - 24:00 -- PM (12-hour)"</div>
-                            <input type="time" class="text-center form-control form-control" id="filterEndTime" name="end_time" step="1" value="23:59:59" required>
+                            <input type="time" class="text-center form-control form-control" id="exportEndTime" name="end_time" step="1" value="23:59:59" required>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
