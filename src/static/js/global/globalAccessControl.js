@@ -38,7 +38,7 @@ function refreshToken() {
     .then(response => {
         if (response.status === 401) {
             // alert("გთხოვთ ხელახლა გაიაროთ ავტორიზაცია.");
-            showAlert('danger', ' გთხოვთ ხელახლა გაიაროთ ავტორიზაცია.');
+            showAlert('alertPlaceholder', 'danger', ' გთხოვთ ხელახლა გაიაროთ ავტორიზაცია.');
             clearSessionData(); // Clear session data and redirect to login
             return Promise.reject('Unauthorized');
         }
@@ -106,8 +106,8 @@ function makeApiRequest(url, options) {
         });
 }
 
-function showAlert(category, message) {
-    const alertPlaceholder = document.getElementById('alertPlaceholder');
+function showAlert(divID, category, message) {
+    const alertPlaceholder = document.getElementById(divID);
     
     // Create a new alert element
     const alertDiv = document.createElement('div');

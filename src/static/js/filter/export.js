@@ -1,131 +1,156 @@
-// Open the modal for creating or editing a GeophysicSeismic record
+// გახსენი მენიუ CSV ექსპორტისთვის
 function openExportCSVModal() {
-    fetchExportCSVData();
+    fetchExportCSVData(); // მიიღე სადგურების მონაცემები
     const modal = new bootstrap.Modal(document.getElementById('ExportCSV'));
-    modal.show();
-
+    modal.show(); // აჩვენე მენიუ
 }
 
+const token = localStorage.getItem('access_token'); // JWT ტოკენის აღება ადგილობრივ შენახვიდან
+
+// სადგურების მონაცემების გამოტანა
 function fetchExportCSVData() {
-    const token = localStorage.getItem('access_token');
     const stationList = document.getElementById("stationList");
 
-    // Fetch station data from the backend
+    // სადგურების მონაცემების მიღება API-სგან
     makeApiRequest('/api/stations', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}` // Include the JWT token in the Authorization header
+            'Authorization': `Bearer ${token}` // JWT ტოკენის დამატება ავტორიზაციისთვის
         }
-        })
-        .then(data => {
-            // Clear existing options
-            stationList.innerHTML = '';
-            data.forEach(station => {
-                const li = document.createElement("li");
-                li.innerHTML = `
-                    <label class="dropdown-item text-start">
-                        <input type="checkbox" class="station-checkbox" value="${station.id}"> ${station.station_name}
-                    </label>
-                `;
-                stationList.appendChild(li);
-            });
-
-            addEventListeners();
-        })
-        .catch(error => {
-            console.error('Error fetching stations:', error);
+    })
+    .then(data => {
+        // გასუფთავება არსებული ჩექბოქსებისგან
+        stationList.innerHTML = '';
+        const checkbox = document.createElement("li");
+        checkbox.innerHTML = `
+            <label class="dropdown-item">
+                <input type="checkbox" id="selectAll"> ყველა სადგურის არჩევა
+            </label>
+            <hr>
+        `;
+        stationList.appendChild(checkbox);
+        data.forEach(station => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <label class="dropdown-item text-start">
+                    <input type="checkbox" class="station-checkbox" value="${station.id}"> ${station.station_name}
+                </label>
+            `;
+            stationList.appendChild(li);
         });
+
+        addEventListeners(); // დაამატე სადგურების ჩართვის/გამორთვის მოვლინები
+    })
+    .catch(error => {
+        console.error('Error fetching stations:', error); // შეცდომა სადგურების მიღებისას
+    });
 }
 
-// Add event listeners to checkboxes
+// მოვლენის მსვლელობები ჩაამატე ჩექბოქსებზე
 function addEventListeners() {
     const selectAll = document.getElementById("selectAll");
     const checkboxes = document.querySelectorAll(".station-checkbox");
 
+    // ყველა სადგურის არჩევა/გაუქმება
     selectAll.addEventListener("change", function() {
-        checkboxes.forEach(cb => cb.checked = selectAll.checked);
-        updateSelection();
+        checkboxes.forEach(cb => cb.checked = selectAll.checked); // ყველა სადგურის ჩართულობა
+        updateSelection(); // განაახლე რაოდენობა
     });
 
     checkboxes.forEach(cb => {
         cb.addEventListener("change", function() {
             if (!this.checked) {
-                selectAll.checked = false;
+                selectAll.checked = false; // თუ ერთ-ერთი ჩექბოქსი გამორთულია, ყველა სადგური გამორთულია
             } else if ([...checkboxes].every(cb => cb.checked)) {
-                selectAll.checked = true;
+                selectAll.checked = true; // თუ ყველა ჩექბოქსი მონიშნულია, "select all" ჩაერთოს
             }
-            updateSelection();
+            updateSelection(); // განაახლე რაოდენობა
         });
     });
 }
-// Update selected station count
+
+// განაახლე არჩეული სადგურების რაოდენობა
 function updateSelection() {
     const selectedStations = document.getElementById("selectedStations");
 
     const checkedStations = document.querySelectorAll(".station-checkbox:checked");
-    selectedStations.textContent = checkedStations.length;
+    selectedStations.textContent = checkedStations.length; // აჩვენე არჩეული სადგურების რაოდენობა
 }
 
+// ფორმის გამოგზავნა
+document.getElementById('ExportCSVForm').onsubmit = submitExportCSVForm;
 
-// Get the button element
-const exportButton = document.getElementById('exportButton');
-const loadingMessage = document.getElementById('loadingMessage');
-
-// Add event listener to the button
-exportButton.addEventListener('click', function () {
-    // Show loading message
-    loadingMessage.style.display = 'block';
-    exportButton.disabled = true; // Disable the button to prevent multiple clicks
-
-    // Prepare the request body with the parameters
+function submitExportCSVForm(event) {
+    event.preventDefault(); // ფორმის ჩვეულებრივი გამოგზავნა გადაგვაქვს
+    // შექმენი მონაცემები, რომლებიც გადაეცემა API-ს
+    const formData = new FormData(document.getElementById('ExportCSVForm'));
     const exportData = {
-        date: '2025-02-10',
-        start_time: '00:00:00',
-        end_time: '23:59:59',
-        step_min: 5,
-        station_id: 1, // Example station_id
-        format: 'csv' // You can choose the desired format
+        start_date: formData.get('start_date'),
+        start_time: formData.get('start_time'),
+        end_date: formData.get('end_date'),
+        end_time: formData.get('end_time'),
+        step_min: formData.get('step_min'),
+        station_ids: [] // დაამატე არჩეული სადგურების ID-ები
     };
 
-    // Send POST request to the Flask API
+    const selectedStations = document.querySelectorAll(".station-checkbox:checked");
+    if (selectedStations.length <= 0) {
+        showAlert('alertDiv', 'danger', 'გთხოვთ მონიშნოთ რომელიმე სადგური.'); // შეტყობინების ჩვენება თუ სადგური არ არის არჩეული
+    } else {
+        selectedStations.forEach(station => {
+            exportData.station_ids.push(station.value); // დაამატე არჩეული სადგურის ID
+        });
+        makeExportCSV(exportData); // დაიწყე CSV ექსპორტი
+    }
+};
+
+const exportButton = document.getElementById('submitExportCSVlBtn');
+const loadingMessage = document.getElementById('loadingMessage');
+
+// CSV ფაილის ექსპორტი
+function makeExportCSV(exportCSV){
+    loadingMessage.style.display = 'block'; // აჩვენე დატვირთვის შეტყობინება
+    exportButton.disabled = true; // გამორთე ღილაკი
+
+    // გამოგზავნე POST მოთხოვნა Flask API-სთან
     fetch('/api/export', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('access_token')}` // Add the JWT token if needed
+            'Authorization': `Bearer ${token}` // JWT ტოკენის დამატება
         },
-        body: JSON.stringify(exportData)
+        body: JSON.stringify(exportCSV) // მონაცემების გადაცემა JSON ფორმატში
     })
     .then(response => {
-        if (response.ok) {
-            // If the response is OK, process the CSV file download
-            return response.blob(); // We expect the server to send the file as a blob
-        } else {
-            throw new Error('Failed to export data');
+        if (response.status === 401) {
+            showAlert('alertDiv', 'danger', 'გთხოვთ ხელახლა გაიაროთ ავტორიზაცია.'); // ავტორიზაციის შეცდომა
+            clearSessionData(); // სესიის მონაცემების გაწმენდა
+            return Promise.reject('Unauthorized');
         }
+        if (!response.ok) {
+            throw new Error('Failed to export data'); // შეცდომა ექსპორტირების დროს
+        }
+        return response.blob(); // დაბრუნდება CSV ფაილი
     })
     .then(blob => {
-        // Create a URL for the blob and trigger a download
-        const url = URL.createObjectURL(blob);
+        const url = URL.createObjectURL(blob); // შექმენი URL ბლობისთვის
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'export.csv'; // Specify the filename
+        a.download = 'export.csv'; // განუსაზღვრე ფაილის სახელწოდება
         a.style.display = 'none';
         document.body.appendChild(a);
-        
-        // Trigger the download
-        a.click();
-        
-        // Clean up by revoking the object URL and removing the download link
-        URL.revokeObjectURL(url);
-        document.body.removeChild(a);
+
+        a.click(); // ჩამოიწერე CSV ფაილი
+
+        URL.revokeObjectURL(url); // წაშალე URL
+        document.body.removeChild(a); // წაშალე ელემენტი
     })
-    .catch(error => {
-        console.error('Error exporting data:', error);
+    .catch(error => {  
+        showAlert('alertDiv', 'danger', 'Error: გაუმართავი CSV ფაილის გადმოწერა.'); // შეცდომა
+        console.error('Error exporting data:', error); // შეცდომის ლოგირება
     })
     .finally(() => {
-        // Hide loading message and re-enable the button
-        loadingMessage.style.display = 'none';
-        exportButton.disabled = false;
+        loadingMessage.style.display = 'none'; // დამალე დატვირთვის შეტყობინება
+        exportButton.disabled = false; // კვლავ გაააქტიურე ღილაკი
     });
-});
+}

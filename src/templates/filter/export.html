@@ -12,6 +12,7 @@
     
             <!-- Modal body -->
             <div class="modal-body">
+                <div id="alertDiv"></div>
                 <form class="row mt-2 d-flex justify-content-center align-items-center" id="ExportCSVForm" enctype="multipart/form-data">
                     <div class="m-2" style="width:100vw">
                         <div class="dropdown text-center">
@@ -19,13 +20,6 @@
                                 Select Any Stations
                             </button>
                             <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton" id="stationList">
-                                <!-- Select All Option -->
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox" id="selectAll"> Select All Stations
-                                    </label>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
                                 <!-- Dynamic station checkboxes will be added here -->
                             </ul>
                         </div>
@@ -34,7 +28,7 @@
                     <div class="col m-2">
                         <div class="text-center pt-2">Start Date (From):</div>
                         <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
-                        <input type="date" class="text-center form-control form-control" id="filterStartDate" name="date" value="{{ start_date }}" required>
+                        <input type="date" class="text-center form-control form-control" id="filterStartDate" name="start_date" value="{{ today_date }}" required>
                     </div>
                     <div class="col m-2">
                         <div class="text-center pt-2">Start Time (From):</div>
@@ -45,7 +39,7 @@
                         <div class="col m-2">
                             <div class="text-center pt-2">End Date (Until):</div>
                             <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
-                            <input type="date" class="text-center form-control form-control" id="filterEndDate" name="date" value="{{ end_date }}" required>
+                            <input type="date" class="text-center form-control form-control" id="filterEndDate" name="end_date" value="{{ today_date }}" required>
                         </div>
                         <div class="col m-2">
                             <div class="text-center pt-2">End Time (Until):</div>
@@ -66,9 +60,11 @@
                         </div>
                     </div>
                     <div class="m-5 text-center">
-                        <button type="submit" class="btn btn-sm btn-primary">გადმოწერა</button>
+                        <button type="submit" class="btn btn-sm btn-primary" id="submitExportCSVlBtn">გადმოწერა</button>
                         <button type="reset" class="btn btn-sm btn-secondary">გასუფთავება</button>
                     </div>
+                    <!-- Optional: You can add a loading spinner or message while the export is being processed -->
+                    <div id="loadingMessage" class="text-center" style="display: none;">Processing CSV export...</div>
                 </form>
             </div>
         </div>

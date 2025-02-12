@@ -3,6 +3,7 @@ from datetime import datetime
 from sqlalchemy import func
 from flask import send_file
 from collections import defaultdict
+from itertools import islice
 
 from flask_jwt_extended import jwt_required
 
@@ -47,30 +48,26 @@ class Export_API(Resource):
         except ValueError:
             return {"error": "ფორმატის არასწორი ტიპი. გამოიყენეთ ციფრი/რიცხვი"}, 400
         try:
-            station_ids = [int(x) for x in args['station_ids']]
+            station_ids = [int(x) for x in args['station_ids']] if args['station_ids'] else []
         except ValueError:
             return {"error": "ფორმატის არასწორი ტიპი. გამოიყენეთ ციფრი/რიცხვი"}, 400
-
+        if not station_ids:
+            return {"error": "გთხოვთ მიუთითოთ სადგურები"}, 400
         if step_min % 5 != 0:
             return {"error": "დარწმუნდით, რომ მითითებული სტეპი იყოფა 5-ზე"}, 400
         
-
-
-        weather_data = WeatherData.query.filter(WeatherData.station_id.in_(station_ids),
-                                            func.date(WeatherData.precip_time) >= start_date,
-                                            func.date(WeatherData.precip_time) <= end_date,
-                                            func.time(WeatherData.precip_time) >= start_time,
-                                            func.time(WeatherData.precip_time) <= end_time).order_by(WeatherData.station_id,WeatherData.precip_time).all()
-            
-
+        weather_data = WeatherData.query.filter(
+            WeatherData.station_id.in_(station_ids),
+            func.date(WeatherData.precip_time) >= start_date,
+            func.date(WeatherData.precip_time) <= end_date,
+            func.time(WeatherData.precip_time) >= start_time,
+            func.time(WeatherData.precip_time) <= end_time
+        ).order_by(WeatherData.station_id, WeatherData.precip_time).all()
         
         if not weather_data:
             return {"error": "მონაცემი ვერ მოიძებნა"}, 404
         
-
         step = int(step_min / 5)
-
-
         grouped_data = defaultdict(list)
         for entry in weather_data:
             grouped_data[entry.station_id].append(entry)
@@ -78,11 +75,10 @@ class Export_API(Resource):
         # Apply step filter within each station's dataset
         filtered_data = []
         for station, data in grouped_data.items():
-            filtered_data.extend(data[i] for i in range(0, len(data), step))
+            filtered_data.extend(list(islice(data, 0, None, step)))
 
         filtered_data.sort(key=lambda x: x.precip_time)
-
-
+        
         # Create a unique filename for each request
         file_name = 'export.csv'
         file_path = os.path.join(Config.EXPORT_DIR, file_name)
