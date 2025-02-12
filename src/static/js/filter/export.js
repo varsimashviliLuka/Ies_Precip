@@ -111,7 +111,8 @@ const loadingMessage = document.getElementById('loadingMessage');
 function makeExportCSV(exportCSV){
     loadingMessage.style.display = 'block'; // აჩვენე დატვირთვის შეტყობინება
     exportButton.disabled = true; // გამორთე ღილაკი
-
+    const startDate = document.getElementById('exportStartDate').value;
+    const endDate = document.getElementById('exportEndDate').value;
     // გამოგზავნე POST მოთხოვნა Flask API-სთან
     fetch('/api/export', {
         method: 'POST',
@@ -136,10 +137,10 @@ function makeExportCSV(exportCSV){
         const url = URL.createObjectURL(blob); // შექმენი URL ბლობისთვის
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'export.csv'; // განუსაზღვრე ფაილის სახელწოდება
+        
+        a.download = `${startDate}_${endDate}.csv`; // განუსაზღვრე ფაილის სახელწოდება
         a.style.display = 'none';
         document.body.appendChild(a);
-
         a.click(); // ჩამოიწერე CSV ფაილი
 
         URL.revokeObjectURL(url); // წაშალე URL
