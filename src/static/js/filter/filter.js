@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Add a default option
             const defaultOption = document.createElement('option');
-            defaultOption.textContent = 'Select Any Station';
+            defaultOption.textContent = 'აირჩიეთ სადგური';
             defaultOption.disabled = true;
             stationSelect.appendChild(defaultOption);
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             } else {
                 const noDataOption = document.createElement('option');
-                noDataOption.textContent = 'No stations available';
+                noDataOption.textContent = 'სადგურები არ მოიძებნა';
                 stationSelect.appendChild(noDataOption);
             }
         })
