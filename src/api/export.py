@@ -80,7 +80,7 @@ class Export_API(Resource):
         filtered_data.sort(key=lambda x: x.precip_time)
         
         # Create a unique filename for each request
-        file_name = 'export.csv'
+        file_name = f'{start_date}-{end_date}.csv'
         file_path = os.path.join(Config.EXPORT_DIR, file_name)
 
         # Create a CSV file and write the filtered data
