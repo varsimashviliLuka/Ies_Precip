@@ -6,8 +6,7 @@ import datetime
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from src import create_app
-from src.models import DivPositions, PrevPrecip, WeatherData
-# from src.config import TestConfig
+from src.models import DivPositions, PrevPrecip
 
 # ეს ფუნქცია ითვლის pa_long-ს  ქვემოთ ჩამოთვლილი მონაცემების გამოყენებით
 def calc_pa_long(stations_pa, prev_stations):
@@ -22,22 +21,25 @@ def calc_pa_long(stations_pa, prev_stations):
         if pa != '--:--':
             pa = float(pa)
 
-        if (pa == 0 or pa == '--:--') and prev_pa !=0:
+        elif (pa == 0.0 or pa == '--:--') and (prev_pa !=0.0 or prev_pa == '--:--'):
             zero_start_time = datetime.datetime.now()
             prev_pa = 0.0
+            last_pa_long = pa_long
 
-        elif (pa == 0 or pa == '--:--') and prev_pa == 0:
+        elif (pa == 0.0 or pa == '--:--') and (prev_pa == 0.0 or prev_pa == '--:--'):
             elapsed_time = datetime.datetime.now() - zero_start_time
             prev_pa = 0.0
             if elapsed_time >= datetime.timedelta(hours=24):
-                pa_long = 0
-                zero_start_time = datetime.datetime.now()
+                pa_long = 0.0
+                last_pa_long = 0.0
+            else:
+                continue
 
         elif pa >= prev_pa:
             pa_long = pa + last_pa_long
             prev_pa = pa
 
-        elif 0 < pa < prev_pa:
+        elif 0.0 < pa < prev_pa:
             last_pa_long = pa_long
             pa_long = last_pa_long + pa
             prev_pa = pa
