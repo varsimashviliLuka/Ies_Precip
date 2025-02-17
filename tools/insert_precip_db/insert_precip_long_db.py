@@ -31,9 +31,8 @@ def calc_pa_long(stations_pa, prev_stations):
             prev_pa = 0.0
             if elapsed_time >= datetime.timedelta(hours=24):
                 pa_long = 0.0
+                prev_pa = pa
                 last_pa_long = 0.0
-            else:
-                continue
 
         elif pa >= prev_pa:
             pa_long = pa + last_pa_long
@@ -41,7 +40,6 @@ def calc_pa_long(stations_pa, prev_stations):
 
         elif 0.0 < pa < prev_pa:
             last_pa_long = pa_long
-            pa_long = last_pa_long + pa
             prev_pa = pa
 
         if station:
