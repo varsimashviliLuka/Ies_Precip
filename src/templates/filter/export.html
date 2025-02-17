@@ -6,7 +6,7 @@
     
             <!-- Modal Header -->
             <div class="modal-header">
-                <h4 class="modal-title">Export CSV</h4>
+                <h4 class="modal-title">CSV-ის ექსპორტი</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
     
@@ -17,45 +17,45 @@
                     <div class="m-2" style="width:100vw">
                         <div class="dropdown text-center">
                             <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select Any Stations
+                                აირჩიეთ სადგური
                             </button>
                             <ul class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton" id="stationList" style="max-height: 20rem; overflow-y: auto; width: 100%;">
                                 <!-- Dynamic station checkboxes will be added here -->
                             </ul>
                         </div>
-                        <p class="mt-3">Selected Stations: <span id="selectedStations">0</span></p>
+                        <p class="mt-3">არჩეული სადგურები: <span id="selectedStations">0</span></p>
                     </div>
                     <div class="col m-2">
-                        <div class="text-center pt-2">Start Date (From):</div>
-                        <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
+                        <div class="text-center pt-2">საწყისი თარიღი:</div>
+                        <div class="text-center fw-lighter">YYYY-MM-DD</div>
                         <input type="date" class="text-center form-control form-control" id="exportStartDate" name="start_date" value="{{ today_date }}" required>
                     </div>
                     <div class="col m-2">
-                        <div class="text-center pt-2">Start Time (From):</div>
+                        <div class="text-center pt-2">საწყისი დრო:</div>
                         <div class="text-center fw-lighter">"00:00 - 12:00 -- AM (12-hour)" </div>
                         <input type="time" class="text-center form-control form-control" id="exportStartTime" name="start_time" step="1" value="00:00:00" required>
                     </div>
                     <div class="row">
                         <div class="col m-2">
-                            <div class="text-center pt-2">End Date (Until):</div>
-                            <div class="text-center fw-lighter">Format: YYYY-MM-DD</div>
+                            <div class="text-center pt-2">საბოლოო თარიღი:</div>
+                            <div class="text-center fw-lighter">YYYY-MM-DD</div>
                             <input type="date" class="text-center form-control form-control" id="exportEndDate" name="end_date" value="{{ today_date }}" required>
                         </div>
                         <div class="col m-2">
-                            <div class="text-center pt-2">End Time (Until):</div>
+                            <div class="text-center pt-2">საბოლოო დრო:</div>
                             <div class="text-center fw-lighter">"12:00 - 24:00 -- PM (12-hour)"</div>
                             <input type="time" class="text-center form-control form-control" id="exportEndTime" name="end_time" step="1" value="23:59:59" required>
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
                         <div class="m-2">
-                            <div class="text-center">Select Any Step:</div>
+                            <div class="text-center">აირჩიეთ ინტერვალი:</div>
                             <select class="form-select text-center" id="stepMin" name="step_min" required>
-                                <option selected value="5">5 Minutes</option>
-                                <option value="10">10 Minutes</option>
-                                <option value="30">30 Minutes</option>
-                                <option value="60">1 Hour</option>
-                                <option value="120">2 Hour</option>
+                                <option selected value="5">5 წუთი</option>
+                                <option value="10">10 წუთი</option>
+                                <option value="30">30 წუთი</option>
+                                <option value="60">1 საათი</option>
+                                <option value="120">2 საათი</option>
                             </select>
                         </div>
                     </div>
