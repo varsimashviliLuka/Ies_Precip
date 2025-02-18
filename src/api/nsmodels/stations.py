@@ -20,8 +20,8 @@ stations_parser = reqparse.RequestParser()
 
 stations_parser.add_argument("station_name", required=True, type=str, help="შეიყვანეთ სადგურის სახელი")
 stations_parser.add_argument("url", required=True, type=str, help="შეიყვანეთ სადგურის wunderground-ის ლინკი")
-stations_parser.add_argument("api", required=True, type=str, help="შეიყვანეთ სადგურის wunderground-ის API-ის ლინკი")
 stations_parser.add_argument("latitude", required=True, type=float, help="შეიყვანეთ განედი")
 stations_parser.add_argument("longitude", required=True, type=float, help="შეიყვანეთ გრძედი")
+stations_parser.add_argument("map_status", required=True, type=int, help="შეიყვანეთ რუკის ID (1-თბილისი, 0-მთლიანი)")
 stations_parser.add_argument("status", required=True, type=inputs.boolean, help="შეიყვანეთ სტატუსი")
 

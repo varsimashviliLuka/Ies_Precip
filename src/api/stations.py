@@ -2,7 +2,12 @@ from flask_restx import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from src.api.nsmodels import stations_ns, stations_model, stations_parser
-from src.models import Stations, WeatherData, User
+from src.models import Stations, WeatherData, User, DivPositions, PrevPrecip
+
+from datetime import datetime
+
+import requests
+
 
 
 
@@ -36,16 +41,45 @@ class StationsListAPI(Resource):
 
         args = stations_parser.parse_args()
 
+        shorten_station_name = args.get('url').split('/')[-1]
+        api_url = f'https://api.weather.com/v2/pws/observations/current?apiKey=e1f10a1e78da46f5b10a1e78da96f525&stationId={shorten_station_name}&numericPrecision=decimal&format=json&units=m'
 
+        response = requests.get(api_url)
+
+        if response.status_code != 200:
+            return {'error': 'გთხოვთ შეიყვანეთ სწორი ლინკი'}, 400
+        
 
         new_station = Stations(station_name = args.get('station_name'),
                                url = args.get('url'),
-                               api = args.get('api'),
+                               api = api_url,
                                latitude = args.get('latitude'),
                                longitude = args.get('longitude'),
                                status=args.get('status'))
-        
+
         new_station.create()
+
+        new_div_position = DivPositions(station_id=new_station.id,
+                                        static_px=-20,
+                                        left_right=20,
+                                        line_rotate=0,
+                                        line_left_right=0,
+                                        line_top_bottom=0,
+                                        shorten_station_name=shorten_station_name,
+                                        map_status=args.get('map_status'),
+                                        first_div_height=0,
+                                        precip_accum=0,
+                                        precip_rate=0,
+                                        precip_accum_long=0,
+                                        top_bottom=-45)
+        new_div_position.create()
+
+        new_prev_precip = PrevPrecip(station_id=new_station.id,
+                                     prev_pa=0,
+                                     last_pa_long=0,
+                                     zero_start_time=datetime.now())
+        
+        new_prev_precip.create()
 
         return {"message": f"სადგური წარმატებით დაემატა. სადგურის ID: {new_station.id}"}, 200
     
@@ -81,15 +115,31 @@ class StationsAPI(Resource):
         if not station:
             return {"error": "სადგური არ მოიძებნა."}, 404
         
+        div_position = DivPositions.query.filter_by(station_id=id).first()
+        if not div_position:
+            return {"error": "სადგური არ მოიძებნა."}, 404
+        
         args = stations_parser.parse_args()
+
+        shorten_station_name = args.get('url').split('/')[-1]
+        api_url = f'https://api.weather.com/v2/pws/observations/current?apiKey=e1f10a1e78da46f5b10a1e78da96f525&stationId={shorten_station_name}&numericPrecision=decimal&format=json&units=m'
+
+        response = requests.get(api_url)
+
+        if response.status_code != 200:
+            return {'error': 'გთხოვთ შეიყვანეთ სწორი ლინკი'}, 400
+
 
         station.station_name = args.get('station_name')
         station.url = args.get('url')
-        station.api = args.get('api')
+        station.api = api_url
         station.latitude = args.get('latitude')
         station.longitude = args.get('longitude')
         station.status = args.get('status')
 
+        div_position.map_status=args.get('map_status')
+
+        div_position.save()
         station.save()
 
         return {"message": "სადგური წარმატებით დარედაქტირდა."}, 200
