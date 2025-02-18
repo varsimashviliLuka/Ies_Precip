@@ -21,7 +21,7 @@ def calc_pa_long(stations_pa, prev_stations):
         if pa != '--:--':
             pa = float(pa)
 
-        elif (pa == 0.0 or pa == '--:--') and (prev_pa !=0.0 or prev_pa == '--:--'):
+        if (pa == 0.0 or pa == '--:--') and (prev_pa !=0.0 or prev_pa == '--:--'):
             zero_start_time = datetime.datetime.now()
             prev_pa = 0.0
             last_pa_long = pa_long
