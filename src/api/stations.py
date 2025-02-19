@@ -35,29 +35,47 @@ class StationsListAPI(Resource):
 
         identity = get_jwt_identity()
 
+        # მოწმდება რამდენად აქვთ მომხმარებელს სადგურის დამატების უფლება
+
         admin = User.query.filter_by(uuid=identity).first()
         if not admin.check_permission():
             return {"error": 'თქვენ არ გაქვთ სადგურის დამატების უფლება'}, 403
 
         args = stations_parser.parse_args()
 
+        # მითითებული ლინკი იყოფა ნაწილებად, სადაც ბოლო ნაწილი ყოველთვის რჩება სადგურის ID რისი საშუალებითაც იქმნება API ლინკი
+
         shorten_station_name = args.get('url').split('/')[-1]
         api_url = f'https://api.weather.com/v2/pws/observations/current?apiKey=e1f10a1e78da46f5b10a1e78da96f525&stationId={shorten_station_name}&numericPrecision=decimal&format=json&units=m'
+
+        url = args.get('url')
+
+
+        # მოწმდება რამდენად შესაძლებელია სადგურის დამატება
+
+        station = Stations.query.filter_by(url=url).first()
+        if station:
+            return {'error': 'აღნიშნული სადგური უკვე არსებობს'}, 400
+
+        # API-ის ლინკთან კავშირის დამყარება, რომ გავიგოთ სადგური არსებობს თუ არა
 
         response = requests.get(api_url)
 
         if response.status_code != 200:
             return {'error': 'გთხოვთ შეიყვანეთ სწორი ლინკი'}, 400
         
+        # იქმნება სადგური მომხმარებლის მიერ შეყვანილი პარამეტრებით
 
         new_station = Stations(station_name = args.get('station_name'),
-                               url = args.get('url'),
+                               url = url,
                                api = api_url,
                                latitude = args.get('latitude'),
                                longitude = args.get('longitude'),
                                status=args.get('status'))
 
         new_station.create()
+
+        # ასევე ემატება პოზიციების ცხრილში, default მონაცემებით
 
         new_div_position = DivPositions(station_id=new_station.id,
                                         static_px=-20,
@@ -73,6 +91,8 @@ class StationsListAPI(Resource):
                                         precip_accum_long=0,
                                         top_bottom=-45)
         new_div_position.create()
+
+        # ემატება precip ცხრილშიც, რადგან მოხდეს მისი pa_long ის დათვლა
 
         new_prev_precip = PrevPrecip(station_id=new_station.id,
                                      prev_pa=0,
@@ -105,11 +125,15 @@ class StationsAPI(Resource):
     def put(self,id):
         '''კონკრეტული სადგურის რედაქტირება'''
 
+        # მოწმდება მომხმარებლის უფლებები, თუ აქვს მას სადგურის რედაქტირების უფლება
+
         identity = get_jwt_identity()
 
         admin = User.query.filter_by(uuid=identity).first()
         if not admin.check_permission():
             return {"error": 'თქვენ არ გაქვთ სადგურის რედაქტირების უფლება'}, 403
+
+        # ვეძებთ მითითებული ID-ით სადგურს
 
         station = Stations.query.filter_by(id=id).first()
         if not station:
@@ -121,14 +145,21 @@ class StationsAPI(Resource):
         
         args = stations_parser.parse_args()
 
+        # ვეძებთ სადგურს, რომელსაც გააჩნია მომხმარებლის მიერ შეყვანილი url ლინკი და არ არის თვითონ კონკრეტულად ეს სადგური
+
+        checker_station = Stations.query.filter(Stations.url == args.get('url'), Stations.id != id).first()
+
+        # თუ არსებობს ასეთი სადგური, გავდივართ ერორზე, რომ არ მოხდეს სადგურების და ინფორმაციის დუპლიკაცია
+
+        if checker_station:
+            return {'error': 'აღნიშნული სადგური უკვე არსებობს!'}, 400
+
+        # იქმნება ახალი API ლინკი ახალ url-ზე მორგებული 
+
         shorten_station_name = args.get('url').split('/')[-1]
         api_url = f'https://api.weather.com/v2/pws/observations/current?apiKey=e1f10a1e78da46f5b10a1e78da96f525&stationId={shorten_station_name}&numericPrecision=decimal&format=json&units=m'
 
-        response = requests.get(api_url)
-
-        if response.status_code != 200:
-            return {'error': 'გთხოვთ შეიყვანეთ სწორი ლინკი'}, 400
-
+        # მონაცემები ნახლდება
 
         station.station_name = args.get('station_name')
         station.url = args.get('url')
@@ -148,6 +179,8 @@ class StationsAPI(Resource):
     @stations_ns.doc(security="JsonWebToken")
     def delete(self,id):
         '''კონკრეტული სადგურის წაშლა'''
+
+        # მოწმდება აქვს თუ არა მომხმარებელს სადგურის წაშლის უფლება
 
         identity = get_jwt_identity()
 
