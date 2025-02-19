@@ -37,8 +37,9 @@ class DivPositionsApi(Resource):
                 'line_top_bottom': i.line_top_bottom,
                 'longitude': i.stations.longitude,
                 'static_px': i.static_px,
-                'map_status': i.map_status,
-                'top_bottom': i.top_bottom
+                'map_selected': i.map_selected,
+                'top_bottom': i.top_bottom,
+                'map_status': i.stations.map_status
             }
             result.append(data)
 

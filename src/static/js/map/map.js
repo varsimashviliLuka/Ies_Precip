@@ -73,14 +73,18 @@ function updateData()
 
                 // allUrlSets.forEach(function (urls) {
                     jsond.forEach(function (item1) {
+
+                    if (!item1.map_status){
+                        return;
+                    }
                     
                     let pixel;
                     
-                    if (item1.map_status == 1){
+                    if (item1.map_selected == 1){
                         pixel = map1.project([item1.longitude, item1.latitude]);
                         
                     }
-                    else if(item1.map_status == 0){
+                    else if(item1.map_selected == 0){
                         pixel = map.project([item1.longitude, item1.latitude]);
                     }
     

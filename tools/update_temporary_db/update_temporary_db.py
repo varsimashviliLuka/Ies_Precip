@@ -11,6 +11,14 @@ from src import create_app
 def modify_station_details(station_details):
     for station_detail in station_details:
 
+        # შევამოწმოთ უნდა თუ არა მონაცემის წამოღება
+        if station_detail.stations.fetch_status != True:
+            station_detail.first_div_height = 0.00
+            station_detail.precip_rate = "xx:xx"
+            station_detail.precip_accum = "xx:xx"
+            station_detail.save()
+            continue
+
          # http მოთხოვნას აგზავნის api-ზე რადგან წამოიღოს მონაცები
         response = requests.get(station_detail.stations.api)
 
@@ -53,8 +61,8 @@ def modify_station_details(station_details):
 
 
 def update_temporary_db():
-    # app = create_app(TestConfig)
     app = create_app()
+    # app = create_app(TestConfig)
     with app.app_context():
         try:
             station_details = DivPositions.query.all()

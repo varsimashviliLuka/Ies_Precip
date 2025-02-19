@@ -8,6 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 from src import create_app
 from src.models import DivPositions, PrevPrecip
 
+# from src.config import TestConfig
+
 # ეს ფუნქცია ითვლის pa_long-ს  ქვემოთ ჩამოთვლილი მონაცემების გამოყენებით
 def calc_pa_long(stations_pa, prev_precips):
     for station, prev_precip in zip(stations_pa, prev_precips):
@@ -18,20 +20,21 @@ def calc_pa_long(stations_pa, prev_precips):
         last_pa_long = prev_precip.last_pa_long
 
         # ეს არის ალგორითმი რომელიც ითვლის pa_long ს.
-        if pa != '--:--':
+        if pa != '--:--' and pa != 'xx:xx':
             pa = float(pa)
 
-        if (pa == 0.0 or pa == '--:--') and (prev_pa !=0.0 or prev_pa != '--:--'):
+        if (pa == 0.0 or pa == '--:--' or pa == 'xx:xx') and (prev_pa !=0.0):
             zero_start_time = datetime.datetime.now()
             prev_pa = 0.0
             last_pa_long = pa_long
 
-        elif (pa == 0.0 or pa == '--:--') and (prev_pa == 0.0 or prev_pa == '--:--'):
+        elif (pa == 0.0 or pa == '--:--' or pa == 'xx:xx') and (prev_pa == 0.0):
             elapsed_time = datetime.datetime.now() - zero_start_time
-            prev_pa = 0.0
+
             if elapsed_time >= datetime.timedelta(hours=24):
                 pa_long = 0.0
                 last_pa_long = 0.0
+                zero_start_time = datetime.datetime.now()
 
         elif pa >= prev_pa:
             pa_long = pa + last_pa_long
@@ -42,6 +45,7 @@ def calc_pa_long(stations_pa, prev_precips):
             prev_pa = pa
 
         if station:
+            # print("AKKKK!!!!!",pa_long)
             station.precip_accum_long = f'{float(pa_long):.2f}'
             station.save()
         if prev_precip:
@@ -51,8 +55,8 @@ def calc_pa_long(stations_pa, prev_precips):
             prev_precip.save()
 
 def insert_precip_long_db():
-    # app = create_app(TestConfig)
     app = create_app()
+    # app = create_app(TestConfig)
     with app.app_context():
         try:
             stations_pa = DivPositions.query.all()

@@ -12,7 +12,8 @@ stations_model = stations_ns.model('Stations', {
     'api': fields.String(required=False, description='Wunderground api-ის ლინკი', example='https://api.weather.com/v2/pws/observations/current?apiKey=e1f10a1e7..'),
     'latitude': fields.Float(required=True, description='სადგურის განედი', example=42.0163),
     'longitude': fields.Float(required=True, description='სადგურის გრძედი', example=43.1412),
-    'status': fields.Boolean(required=True,description='სადგურის სტატუს',example=True)
+    'map_status': fields.Boolean(required=True,description='სადგურის რუკის სტატუსი',example=True),
+    'fetch_status': fields.Boolean(required=True,description='სადგურის ინფორმაციის წამოღების სტატუსი',example=True)
 })
 
 
@@ -22,6 +23,7 @@ stations_parser.add_argument("station_name", required=True, type=str, help="შ�
 stations_parser.add_argument("url", required=True, type=str, help="შეიყვანეთ სადგურის wunderground-ის ლინკი")
 stations_parser.add_argument("latitude", required=True, type=float, help="შეიყვანეთ განედი")
 stations_parser.add_argument("longitude", required=True, type=float, help="შეიყვანეთ გრძედი")
-stations_parser.add_argument("map_status", required=True, type=int, help="შეიყვანეთ რუკის ID (1-თბილისი, 0-მთლიანი)")
-stations_parser.add_argument("status", required=True, type=inputs.boolean, help="შეიყვანეთ სტატუსი")
+stations_parser.add_argument("map_selected", required=True, type=int, help="შეიყვანეთ რუკის ID (1-თბილისი, 0-მთლიანი)")
+stations_parser.add_argument("map_status", required=True, type=inputs.boolean, help="შეიყვანეთ რუკაზე ჩვენების სტატუსი")
+stations_parser.add_argument("fetch_status", required=True, type=inputs.boolean, help="შეიყვანეთ მონაცემების ჩაწერის სტატუსი")
 

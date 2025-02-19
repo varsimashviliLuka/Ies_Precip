@@ -11,7 +11,11 @@ class Stations(db.Model, BaseModel):
     api = db.Column(db.String(512), nullable=False)
     latitude = db.Column(db.Numeric(9, 6), nullable=False)
     longitude = db.Column(db.Numeric(9, 6), nullable=False)
-    status = db.Column(db.Boolean,default=True)    
+
+
+    map_status = db.Column(db.Boolean,default=True)  
+    fetch_status = db.Column(db.Boolean, default=True)
+
 
     # Relationship with WeatherData
     weather_data = db.relationship('WeatherData', back_populates='stations')
@@ -39,7 +43,7 @@ class DivPositions(db.Model, BaseModel):
 
     shorten_station_name = db.Column(db.String(256), nullable=False)
 
-    map_status = db.Column(db.Integer, nullable=False)
+    map_selected = db.Column(db.Integer, nullable=False)
 
     first_div_height = db.Column(db.Float, nullable=False)
 
