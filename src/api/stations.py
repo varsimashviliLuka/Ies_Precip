@@ -71,7 +71,8 @@ class StationsListAPI(Resource):
                                api = api_url,
                                latitude = args.get('latitude'),
                                longitude = args.get('longitude'),
-                               status=args.get('status'))
+                               map_status=args.get('map_status'),
+                               fetch_status=args.get('fetch_status'))
 
         new_station.create()
 
@@ -84,11 +85,11 @@ class StationsListAPI(Resource):
                                         line_left_right=0,
                                         line_top_bottom=0,
                                         shorten_station_name=shorten_station_name,
-                                        map_status=args.get('map_status'),
+                                        map_selected=args.get('map_selected'),
                                         first_div_height=0,
-                                        precip_accum=0,
-                                        precip_rate=0,
-                                        precip_accum_long=0,
+                                        precip_accum='0.00',
+                                        precip_rate='0.00',
+                                        precip_accum_long='0.00',
                                         top_bottom=-45)
         new_div_position.create()
 
@@ -166,9 +167,10 @@ class StationsAPI(Resource):
         station.api = api_url
         station.latitude = args.get('latitude')
         station.longitude = args.get('longitude')
-        station.status = args.get('status')
+        station.map_status = args.get('map_status')
+        station.fetch_status = args.get('fetch_status')
 
-        div_position.map_status=args.get('map_status')
+        div_position.map_selected=args.get('map_selected')
 
         div_position.save()
         station.save()

@@ -54,7 +54,7 @@ def populate_db():
                 line_rotate = row['line_rotate'],
                 line_left_right = row['line_left_right'],
                 line_top_bottom = row['line_top_bottom'],
-                map_status = row['status'],
+                map_selected = row['status'],
                 shorten_station_name = row['id'],
                 top_bottom = row['top_bottom'],
                 first_div_height = row['first_div_height'],

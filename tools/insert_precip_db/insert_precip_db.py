@@ -7,6 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 from src import create_app
 from src.models import DivPositions, WeatherData
 
+# from src.config import TestConfig
 
 def fetch_precip_data():
     """
@@ -18,7 +19,7 @@ def fetch_precip_data():
             DivPositions.precip_rate, 
             DivPositions.precip_accum, 
             DivPositions.precip_accum_long
-        ).all()
+        ).filter(DivPositions.precip_accum != "xx:xx").all()
         
         logging.debug(f"ბაზიდან ამოღებულია {len(precip_data)} ჩანაწერი.")
         return precip_data
@@ -58,6 +59,7 @@ def insert_precip_db():
     მთავარი ფუნქცია, რომელიც მონაცემებს იბარებს და ჩაწერს ბაზაში.
     """
     app = create_app()
+    # app = create_app(TestConfig)
     with app.app_context():
         try:
             precip_data = fetch_precip_data()

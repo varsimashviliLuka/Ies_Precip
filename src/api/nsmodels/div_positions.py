@@ -23,8 +23,9 @@ div_positions_model = div_positions_ns.model('Div Positions', {
     'line_top_bottom': fields.Float(required=True, description='line_top_bottom', example=-13),
     'longitude': fields.Float(required=True, description='სადგურის გრძედი', example=42.69),
     'static_px': fields.Float(required=True, description='static_px', example=-45),
-    'map_status': fields.Float(required=True, description='map_status', example=0),
+    'map_selected': fields.Float(required=True, description='map_selected', example=0),
     'top_bottom': fields.Float(required=True, description='top_bottom', example=-45.99),
+    'map_status': fields.Boolean(required=True, description='map_status', example=True)
 })
 
 
