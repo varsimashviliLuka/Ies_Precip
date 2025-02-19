@@ -44,6 +44,12 @@ class StationsListAPI(Resource):
         shorten_station_name = args.get('url').split('/')[-1]
         api_url = f'https://api.weather.com/v2/pws/observations/current?apiKey=e1f10a1e78da46f5b10a1e78da96f525&stationId={shorten_station_name}&numericPrecision=decimal&format=json&units=m'
 
+        url = args.get('url')
+
+        station = Stations.query.filter_by(url=url).first()
+        if station:
+            return {'error': 'აღნიშნული სადგური უკვე არსებობს'}, 400
+
         response = requests.get(api_url)
 
         if response.status_code != 200:
@@ -51,7 +57,7 @@ class StationsListAPI(Resource):
         
 
         new_station = Stations(station_name = args.get('station_name'),
-                               url = args.get('url'),
+                               url = url,
                                api = api_url,
                                latitude = args.get('latitude'),
                                longitude = args.get('longitude'),
