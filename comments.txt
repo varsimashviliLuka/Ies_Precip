@@ -12,3 +12,16 @@ python3 -m venv venv
 source venv/bin/activate
 დააინსტალირეთ dependencies:
 pip install -r requirements.txt
+
+
+docker exec -it mysql /bin/sh
+docker exec -it mysql mysql -u root -p
+
+# Flask Migrations
+docker exec -it iesprojects_flask_1 /bin/sh 
+
+# Re-run Migration Commands:
+flask db migrate -m "Initial migration"
+flask db upgrade
+
+flask db current
