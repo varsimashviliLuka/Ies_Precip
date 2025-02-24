@@ -39,3 +39,12 @@ function login(event) {
 
 // Attach the login function to the form's submit event
 document.getElementById('loginForm').onsubmit = login;
+const togglePassword = document.getElementById('togglePassword');
+const password = document.getElementById('password');
+
+togglePassword.addEventListener('click', (e) => {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    e.target.classList.toggle('bi-eye');
+
+});
