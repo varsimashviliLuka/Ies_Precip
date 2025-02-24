@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-<link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet"/>
 <script type="text/javascript" src="{{ url_for('static', filename='js/auth/login.js') }}" defer></script>
 <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-md-9 col-lg-6 col-xl-5">
@@ -29,7 +28,7 @@
                 <label class="form-label" for="password">პაროლი</label>
                 <input type="password" id="password" name="password" class="form-control form-control-lg"
                     placeholder="შეიყვანეთ პაროლი" required autocomplete="password"/>
-                    <i class="bi bi-eye-slash" id="togglePassword"></i>
+                <i id="togglePassword"><img src="static/img/eye-hide.svg" alt="Icon eye-hide" width="25px" id="togglePasswordImg"></i>
             </div>
 
             <!-- Remember me and Forgot password -->

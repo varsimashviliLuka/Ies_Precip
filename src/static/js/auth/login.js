@@ -41,10 +41,19 @@ function login(event) {
 document.getElementById('loginForm').onsubmit = login;
 const togglePassword = document.getElementById('togglePassword');
 const password = document.getElementById('password');
+const togglePasswordImg = document.getElementById('togglePasswordImg');
+
+const eyeViewPath = "static/img/eye-view.svg";
+const eyehidePath = "static/img/eye-hide.svg";
 
 togglePassword.addEventListener('click', (e) => {
     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
     password.setAttribute('type', type);
-    e.target.classList.toggle('bi-eye');
+
+    if (togglePasswordImg.src.includes(eyeViewPath)) {
+        togglePasswordImg.src = eyehidePath;
+    } else{
+        togglePasswordImg.src = eyeViewPath;
+    }
 
 });
