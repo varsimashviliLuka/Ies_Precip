@@ -45,4 +45,9 @@ class TestConfig(Config):
     WTF_CSRF_ENABLED = False
 
     SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{Config.MYSQL_USER}:{Config.MYSQL_PASSWORD}@localhost/{Config.MYSQL_DATABASE}'
+
+    MAIL_SERVER=""
+    MAIL_PORT = 587
+    MAIL_USERNAME = ""
+    MAIL_PASSWORD = ""
     
