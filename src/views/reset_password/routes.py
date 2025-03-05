@@ -5,7 +5,7 @@ from src.config import Config
 from src.utils import url_serializer
 
 
-TEMPLATES_FOLDER = path.join(Config.BASE_DIR, Config.TEMPLATES_FOLDERS, "reset_password")
+TEMPLATES_FOLDER = path.join(Config.BASE_DIR, Config.TEMPLATES_FOLDERS, "resetPassword")
 reset_password_blueprint = Blueprint("reset_password", __name__, template_folder=TEMPLATES_FOLDER)
 
 @reset_password_blueprint.route("/reset_password/<token>")
@@ -17,4 +17,4 @@ def reset_password(token):
     elif uuid == 'expired':
         return redirect(url_for('auth.login', message=uuid))
 
-    return render_template("reset_password.html", token=token)
+    return render_template("resetPassword.html", token=token)

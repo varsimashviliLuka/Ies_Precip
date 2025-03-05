@@ -24,7 +24,7 @@ function login(event) {
             // JWT ტოკენების შენახვა localStorage-ში
             showAlert('alertPlaceholder', 'success', data.message || ' პაროლი წარმატებით შეიცვალა.');
             setTimeout(() => {
-                window.location.href = '/login';
+                clearSessionData();
             }, 1000); // Optional delay (1 second)
             // Redirect to /projects page
         } else {

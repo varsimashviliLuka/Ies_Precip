@@ -1,4 +1,5 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/layout/navbar.js') }}" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/auth/user.js') }}" defer></script>
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary" style="height: 3.5rem;">
     <div class="container-lg">
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -22,3 +23,4 @@
 </nav>
 
 <!-- The UserModal -->
+{% include "user.html" %}

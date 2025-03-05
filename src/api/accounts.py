@@ -172,18 +172,3 @@ class ResetPassword(Resource):
             return {'message': 'პაროლი წარმატებით დარედაქტირდა'}, 200
         except:
             return {'error': 'პაროლის შეცვლის დროს დაფიქსირდა შეცდომა'}, 400
-
-        
-
-
-        
-
-
-
-        
-
-
-
-        
-
-        

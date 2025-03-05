@@ -1,7 +1,5 @@
-let resetPasswordModal;  // Store modal instance globally
-
 function openResetPasswordModal() {
-    resetPasswordModal = new bootstrap.Modal(document.getElementById('resetPasswordModal'));
+    const resetPasswordModal = new bootstrap.Modal(document.getElementById('resetPasswordModal'));
     resetPasswordModal.show(); // Show the modal
 }
 
@@ -13,6 +11,7 @@ function sendEmail(event) {
     const formData = {
         modalEmail: modalEmail
     };
+
 
     fetch('/api/request_reset_password', {
         method: 'POST',
@@ -27,15 +26,18 @@ function sendEmail(event) {
             showAlert('alertPlaceholder', 'success', data.message || ' გთხოვთ შეამოწმოთ ელ.ფოსტა, ვერიფიკაციის ლინკი გამოგზავნილია.');
             
             // Close the modal 
-                resetPasswordModal.hide();
+                closeModal('resetPasswordModal');
         } else {
-            showAlert('alertPlaceholder', 'danger', data.error || ' გაუმართავი ელ.ფოსტა.');
+            showAlert('forgetAlertDiv', 'danger', data.error || ' გაუმართავი ელ.ფოსტა.');
+            
         }
     })
     .catch(error => {
         console.error('Error:', error);
     });
 }
+
+
 
 document.getElementById('modalResetPassword').onsubmit = sendEmail;
 document.addEventListener('DOMContentLoaded', function() {
