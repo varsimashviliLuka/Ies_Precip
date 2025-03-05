@@ -7,7 +7,7 @@ accounts_ns = api.namespace('Accounts', description='API მომხმარ�
 user_model = accounts_ns.model('User', {
     'email': fields.String(required=True, type=inputs.email(check=True), description='მომხმარებლის ელ.ფოსტა'),
     'role': fields.String(required=True, type=str, description='როლის სახელი'),
-    'uuid': fields.Integer(required=True, type=str, description='მომხმარებლის uuid')
+    'uuid': fields.String(required=True, type=str, description='მომხმარებლის uuid')
 })
 
 user_parser = reqparse.RequestParser()
