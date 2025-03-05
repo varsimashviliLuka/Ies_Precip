@@ -149,10 +149,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const registrationPage = '/registration';
     const homePage = '/';
     const filterPage = '/filter';
+    const resetPasswordPage = '/reset_password'
     const currentPage = window.location.pathname;
     const token = localStorage.getItem('access_token');
 
-    if (!token && currentPage !== loginPage && currentPage !== registrationPage && currentPage !== homePage) {
+    if (!token && currentPage !== loginPage && currentPage !== registrationPage && currentPage !== homePage && !currentPage.startsWith(resetPasswordPage)) {
         window.location.href = loginPage;
     }
 
