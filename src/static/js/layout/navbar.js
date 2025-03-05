@@ -37,6 +37,30 @@ document.addEventListener("DOMContentLoaded", function() {
         const logoutItem = document.createElement('li');
         logoutItem.className = 'd-flex justify-content-center';
 
+        const access_token = localStorage.getItem('access_token');
+        if (access_token) {
+            const emailSpan = document.createElement('span');
+            emailSpan.className = 'nav-link me-4'; // Margin end for spacing
+
+            const iconImg = document.createElement('img');
+            iconImg.src = '/static/img/circle-user-solid.svg';
+            iconImg.alt = 'Email Icon'; 
+            iconImg.style.width = '30px'; 
+            iconImg.style.height = '30px'; 
+            iconImg.style.verticalAlign = 'middle';
+            iconImg.style.cursor = 'pointer';
+
+
+            emailSpan.appendChild(iconImg);
+
+            emailSpan.onclick = function() {
+                openUserModal();
+            };
+
+            logoutItem.appendChild(emailSpan); // Append email first
+            
+        }
+
         const logoutLink = document.createElement('a');
         logoutLink.href = '/login';
         logoutLink.className = 'btn btn-sm btn-danger m-2';

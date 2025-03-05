@@ -4,12 +4,12 @@ from flask_cors import CORS
 from src.config import Config
 from src.api import api
 from src.extensions import db, api, migrate, jwt
-from src.views import filter_blueprint, auth_blueprint
+from src.views import filter_blueprint, auth_blueprint, reset_password_blueprint
 from src.commands import init_db, populate_db, insert_db
 
 from src.models import User
 
-BLUEPRINTS = [filter_blueprint, auth_blueprint]
+BLUEPRINTS = [filter_blueprint, auth_blueprint, reset_password_blueprint]
 COMMANDS = [init_db, populate_db, insert_db]
 
 def create_app(config=Config):

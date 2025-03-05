@@ -35,8 +35,17 @@ class User(db.Model, BaseModel):
             return True
         return False
 
+    def generateJson(self):
+        result = {'email': self.email,
+                  'id': self.id,
+                  'uuid': self.uuid,
+                  'role_name': self.role,
+                  'is_admin': self.check_permission()}
+        return result
+
+
     def __repr__(self):
-        return f"<User ({self.email})>"
+        return f'{self.generateJson()}'
     
 
 class Role(db.Model, BaseModel):

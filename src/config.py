@@ -38,6 +38,11 @@ class Config(object):
         }
     }
 
+    MAIL_SERVER = os.getenv('MAIL_SERVER', 'MAIL_SERVER')
+    MAIL_PORT = os.getenv('MAIL_PORT', 'MAIL_PORT')
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME', 'MAIL_USERNAME')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD', 'MAIL_PASSWORD')
+
 
 class TestConfig(Config):
 
@@ -46,8 +51,5 @@ class TestConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{Config.MYSQL_USER}:{Config.MYSQL_PASSWORD}@localhost/{Config.MYSQL_DATABASE}'
 
-    MAIL_SERVER=""
-    MAIL_PORT = 587
-    MAIL_USERNAME = ""
-    MAIL_PASSWORD = ""
+
     
