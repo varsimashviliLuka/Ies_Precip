@@ -11,8 +11,6 @@ function sendEmail(event) {
     const formData = {
         modalEmail: modalEmail
     };
-
-
     fetch('/api/request_reset_password', {
         method: 'POST',
         headers: {
@@ -24,17 +22,18 @@ function sendEmail(event) {
     .then(data => {
         if (data.message) {
             showAlert('alertPlaceholder', 'success', data.message || ' გთხოვთ შეამოწმოთ ელ.ფოსტა, ვერიფიკაციის ლინკი გამოგზავნილია.');
-            
             // Close the modal 
                 closeModal('resetPasswordModal');
         } else {
             showAlert('forgetAlertDiv', 'danger', data.error || ' გაუმართავი ელ.ფოსტა.');
-            
+
         }
     })
     .catch(error => {
         console.error('Error:', error);
     });
+
+
 }
 
 
