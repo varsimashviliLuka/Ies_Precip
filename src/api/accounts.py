@@ -4,6 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from src.models import User, Role
 from src.api.nsmodels import accounts_ns, user_model, user_parser, request_password_reset_parser, password_reset_parser
 from src.utils import mail, url_serializer
+from datetime import datetime, timedelta
 
 # API საკუთარი მონაცემების მიღებისთვის
 @accounts_ns.route('/user')
@@ -126,6 +127,12 @@ class RequestResetPassword(Resource):
 
         subject = 'პაროლის შეცვლა'
         message = f'მოგესალმებით,\nპაროლის შესაცვლელად გთხოვთ გადახვიდეთ ლინკზე: {reset_url}'
+        
+        last_sent = user.last_sent_email
+        current_time = datetime.now()
+        difference = current_time - last_sent
+        if difference < timedelta(seconds=60):
+            return {'error': f'გთხოვთ თავიდან სცადოთ {int(60 - difference.total_seconds())} წამში'}, 400
 
         try:
             status = mail.send_mail(emails=[email], subject=subject, message=message)
@@ -133,6 +140,11 @@ class RequestResetPassword(Resource):
             if not status:
                 return{'error': 'ელ.ფოსტის გაგზავნის დროს დაფიქსირდა შეცდომა'}, 400
             
+            current_time = datetime.now()
+
+            user.last_sent_email = current_time
+            user.save()
+
             return {'message': 'გთხოვთ შეამოწმოთ ელ.ფოსტა, ვერიფიკაციის ლინკი გამოგზავნილია'}, 200
         except Exception as err:
             return {'error': f'ელ.ფოსტის გაგზავნის დროს დაფიქსირდა შეცდომა: {err}'}, 400

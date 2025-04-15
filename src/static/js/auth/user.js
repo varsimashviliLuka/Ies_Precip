@@ -58,7 +58,6 @@ function changePassword(){
     const formData = {
         modalEmail: emailSpan
     };
-
     makeApiRequest('/api/request_reset_password', {
         method: 'POST',
         headers: {
@@ -68,12 +67,14 @@ function changePassword(){
 
     }).then(data => {
         if (data.message) {
+
             showAlert('alertPlaceholder', 'success', data.message || ' გთხოვთ შეამოწმოთ ელ.ფოსტა, ვერიფიკაციის ლინკი გამოგზავნილია.');
             
             // Close the modal 
                 closeModal('userModal');
         } else {
             showAlert('alertPlaceholder', 'danger', data.error || ' გაუმართავი ელ.ფოსტა.');
+            closeModal('userModal');
         }
     })
     .catch(error => {

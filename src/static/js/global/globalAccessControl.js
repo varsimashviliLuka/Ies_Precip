@@ -3,6 +3,7 @@ function clearSessionData(redirect = true) {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user_email');
+    localStorage.removeItem('permissions_token');
     
     // Optionally redirect the user to the login page or another page
     if (redirect) {
