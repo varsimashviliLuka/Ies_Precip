@@ -15,7 +15,7 @@ class User(db.Model, BaseModel):
     email = db.Column(db.String(120), unique=True, nullable=False)
     _password = db.Column(db.String(255), nullable=False)
 
-    last_sent_email = db.Column(db.DateTime(), default=datetime.now(), nullable=False)
+    last_sent_email = db.Column(db.DateTime(), default=datetime.now(), nullable=True)
 
     # One-to-Many relationship with Role
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))

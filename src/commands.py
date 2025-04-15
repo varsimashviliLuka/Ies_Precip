@@ -128,10 +128,10 @@ def populate_db():
 @with_appcontext
 def insert_db():
     # ყველა სადგურის სტატუსს ცვლის True-თი
-    # stations = Stations.query.all()
-    # for i in stations:
-    #     i.status = True
-    #     i.save()
-
+    stations = DivPositions.query.all()
+    for i in stations:
+        if i.station_id >= 29:
+            i.map_selected = False
+            i.save()
     
     pass
