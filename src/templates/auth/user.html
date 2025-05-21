@@ -1,0 +1,36 @@
+<!-- The Combined User Modal -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/auth/user.js') }}" defer></script>
+<div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+    
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">მონაცემების განახლება</h4>
+                <button type="button" class="btn btn-primary me-3 ms-3" id="accountsButton" style="display: none;" onclick="redirectToAccounts()">
+                    მომხმარებლები
+                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+    
+            <!-- Modal body -->
+            <div class="modal-body">
+                <!-- Display Email as Text -->
+                <div class="mb-1 text-center">
+                    <span id="roleSpan" class="font-weight-normal"></span>
+                </div>
+                <div class="mb-5 text-center">
+                    <span id="emailSpan" class="font-weight-normal"></span>
+                </div>
+
+                    <input type="hidden" id="userUUID" name="uuid">
+
+                    <!-- Change Password Checkbox -->
+                    <div class="m-3 form-check">
+                        <a onclick="changePassword()" class="text-decoration-none" style="cursor: pointer;">პაროლის შეცვლა</a>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>

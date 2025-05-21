@@ -1,5 +1,5 @@
 import uuid
-
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from src.extensions import db
 from src.models.base import BaseModel
@@ -14,6 +14,8 @@ class User(db.Model, BaseModel):
 
     email = db.Column(db.String(120), unique=True, nullable=False)
     _password = db.Column(db.String(255), nullable=False)
+
+    last_sent_email = db.Column(db.DateTime(), default=datetime.now(), nullable=True)
 
     # One-to-Many relationship with Role
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
@@ -35,8 +37,17 @@ class User(db.Model, BaseModel):
             return True
         return False
 
+    def generateJson(self):
+        result = {'email': self.email,
+                  'id': self.id,
+                  'uuid': self.uuid,
+                  'role_name': self.role,
+                  'is_admin': self.check_permission()}
+        return result
+
+
     def __repr__(self):
-        return f"<User ({self.email})>"
+        return f'{self.generateJson()}'
     
 
 class Role(db.Model, BaseModel):

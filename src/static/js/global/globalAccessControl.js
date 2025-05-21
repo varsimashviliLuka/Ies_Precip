@@ -3,6 +3,7 @@ function clearSessionData(redirect = true) {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('user_email');
+    localStorage.removeItem('permissions_token');
     
     // Optionally redirect the user to the login page or another page
     if (redirect) {
@@ -149,10 +150,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const registrationPage = '/registration';
     const homePage = '/';
     const filterPage = '/filter';
+    const resetPasswordPage = '/reset_password'
     const currentPage = window.location.pathname;
     const token = localStorage.getItem('access_token');
 
-    if (!token && currentPage !== loginPage && currentPage !== registrationPage && currentPage !== homePage) {
+    if (!token && currentPage !== loginPage && currentPage !== registrationPage && currentPage !== homePage && !currentPage.startsWith(resetPasswordPage)) {
         window.location.href = loginPage;
     }
 

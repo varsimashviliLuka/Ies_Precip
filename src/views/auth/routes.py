@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request
 from os import path
 
 from src.config import Config
@@ -8,4 +8,5 @@ auth_blueprint = Blueprint("auth", __name__, template_folder=TEMPLATES_FOLDER)
 
 @auth_blueprint.route("/login")
 def login():
-    return render_template("login.html")
+    message = request.args.get('message')
+    return render_template("login.html", message=message)

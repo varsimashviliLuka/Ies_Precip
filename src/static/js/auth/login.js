@@ -11,6 +11,7 @@ function login(event) {
         password: password
     };
 
+
     fetch('/api/login', {
         method: 'POST',
         headers: {

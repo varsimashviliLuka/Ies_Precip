@@ -6,9 +6,18 @@
 
 {% block body %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/auth/login.js') }}" defer></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/auth/forgetPassword.js') }}" defer></script>
+
+
+
+<script>
+    const message = "{{ message }}";
+</script>
+
+
 <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="static/img/login_img.webp"
+        <img src="/static/img/login_img.webp"
             class="img-fluid" alt="Sample image">
     </div>
     <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
@@ -28,7 +37,7 @@
                 <label class="form-label" for="password">პაროლი</label>
                 <input type="password" id="password" name="password" class="form-control form-control-lg"
                     placeholder="შეიყვანეთ პაროლი" required autocomplete="password"/>
-                <i id="togglePassword"><img src="static/img/eye-hide.svg" alt="Icon eye-hide" width="25px" id="togglePasswordImg"></i>
+                <i class="togglePassword" id="togglePassword"><img src="/static/img/eye-hide.svg" alt="Icon eye-hide" width="25px" class="togglePasswordImg" id="togglePasswordImg"></i>
             </div>
 
             <!-- Remember me and Forgot password -->
@@ -39,6 +48,7 @@
                         დამახსოვრება
                     </label>
                 </div>
+                <a onclick="openResetPasswordModal()" class="text-decoration-none" style="cursor: pointer;">პაროლის აღდგენა</a>
             </div>
 
             <!-- Submit button -->
@@ -46,6 +56,9 @@
                 <button type="submit" class="btn btn-primary" style="padding-left: 2.5rem; padding-right: 2.5rem;">შესვლა</button>
             </div>
         </form>
+
+        {% include "forgetPassword.html" %}
+        
     </div>
 </div>
 
