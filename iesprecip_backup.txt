@@ -1,0 +1,10 @@
+# სკრიპტის შესრულების უფლებების მიცემა
+chmod +x /home/iesflask/Ies_Precip/iesprecip_backup.sh
+# გახსენით cron-ის მენიუ sudo უფლებებით:
+sudo crontab -e
+# დაამატეთ შემდეგი ხაზი, რათა სკრიპტი 2 საათზე ყოველ ღამე გაწვდოს:
+0 2 * * * /home/iesflask/Ies_Precip/iesprecip_backup.sh
+
+
+# ან გაუშვით შემდეგი ხაზი, რომელიც ავტომატურად ჩაამატებს cron-ში განრიგს:
+(sudo crontab -l 2>/dev/null; echo "0 2 * * * /home/iesflask/Ies_Precip/iesprecip_backup.sh") | sudo crontab -
